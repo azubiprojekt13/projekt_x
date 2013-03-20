@@ -33,6 +33,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet; 
 import java.sql.SQLException; 
 import java.sql.Statement; 
+import java.sql.Timestamp;
 
 class DBController 
 { 
@@ -82,6 +83,47 @@ class DBController
             throw new RuntimeException(e); 
         } 
     }
+    
+    public int ausgabeDiagrammBestand(String Monat)
+    {
+    	int i = 0;
+    	try
+    	{
+	    	Statement stmt = connection.createStatement(); 
+	    	ResultSet rs = stmt.executeQuery("SELECT * FROM bestand WHERE  strftime('%m',datetime(update_stamp,'unixepoch'))='"+Monat+"';"); 
+	        while (rs.next()) 
+	        {
+	        	i++;
+	        }
+    	}
+    	catch (SQLException e) 
+        { 
+            System.err.println("Couldn't handle DB-Query"); 
+            e.printStackTrace(); 
+        }
+    	return i;
+    }
+    
+    public int ausgabeDiagrammZiele()
+    {
+    	int i = 0;
+    	try
+    	{
+	    	Statement stmt = connection.createStatement(); 
+	    	ResultSet rs = stmt.executeQuery("SELECT * FROM ziele;"); 
+	        while (rs.next()) 
+	        {
+	        	i++;
+	        }
+    	}
+    	catch (SQLException e) 
+        { 
+            System.err.println("Couldn't handle DB-Query"); 
+            e.printStackTrace(); 
+        }
+    	return i;
+    }
+    
 /*       Runtime.getRuntime().addShutdownHook(new Thread() { 
             public void run() { 
                 try { 
@@ -96,7 +138,33 @@ class DBController
             } 
         }); 
     } */
-    public void ausgabe()
+    public void ausgabeZiele()
+    {
+    	try
+    {
+    	Statement stmt = connection.createStatement(); 
+    	ResultSet rs = stmt.executeQuery("SELECT * FROM ziele;"); 
+        while (rs.next()) { 
+            System.out.println("ID = " + rs.getInt("id")); 
+            System.out.println("Taetigkeit = " + rs.getString("taetigkeit")); 
+            System.out.println("Sparte = " + rs.getString("sparte")); 
+            System.out.println("Prämie = " + rs.getDouble("praemie")); 
+            System.out.println("Netto Provision = " + rs.getDouble("netto_provison"));
+            System.out.println("Crossseling = " + rs.getString("crossselling"));
+            System.out.println("Provisionssatz = " + rs.getDouble("provisionssatz"));
+            System.out.println("Create Stamp = " + rs.getTimestamp("create_stamp"));
+            System.out.println("Update Stamp = " + rs.getTimestamp("update_stamp"));
+        }
+        rs.close(); 
+    } catch (SQLException e) 
+    
+    { 
+        System.err.println("Couldn't handle DB-Query"); 
+        e.printStackTrace(); 
+    }
+    }
+    	
+    public void ausgabeBestand()
     {
     	try
     {
@@ -122,10 +190,42 @@ class DBController
     } 
     	 
     }
-    public void insert(String taetigkeit, String sparte, Double praemie, Double netto_provision, String crossselling, Double provisionssatz)
+    public void insertZiele(String taetigkeit, String sparte, Double praemie, Double netto_provision, String crossselling, Double provisionssatz)
     {
     	java.sql.Timestamp  sqlDate = new java.sql.Timestamp(new java.util.Date().getTime());
     	
+    	try 
+    	{ 
+            //Statement stmt = connection.createStatement();
+            
+    	PreparedStatement ps = connection 
+                .prepareStatement("INSERT INTO ziele VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);"); 
+    	
+    	 ps.setInt(1, 1); 
+         ps.setString(2, taetigkeit);
+         ps.setString(3, sparte);
+         ps.setDouble(4, praemie);
+         ps.setDouble(5, netto_provision);
+         ps.setString(6, crossselling);
+         ps.setDouble(7, provisionssatz);
+         ps.setTimestamp(8, sqlDate); 
+         ps.setTimestamp(9, sqlDate);  
+         ps.addBatch();
+         ps.executeBatch();
+    	}
+    	
+    	catch (SQLException e)
+    	{ 
+            System.err.println("Couldn't handle DB-Query"); 
+            e.printStackTrace(); 
+            
+        }
+    	
+    }
+    public void insertBestand(String taetigkeit, String sparte, Double praemie, Double netto_provision, String crossselling, Double provisionssatz)
+    {
+    	
+    	long timestamp = System.currentTimeMillis()/1000;
     	try 
     	{ 
             //Statement stmt = connection.createStatement();
@@ -140,8 +240,8 @@ class DBController
          ps.setDouble(5, netto_provision);
          ps.setString(6, crossselling);
          ps.setDouble(7, provisionssatz);
-         ps.setTimestamp(8, sqlDate); 
-         ps.setTimestamp(9, sqlDate);  
+         ps.setLong(8, timestamp); 
+         ps.setLong(9, timestamp);  
          ps.addBatch();
          ps.executeBatch();
     	}
