@@ -1,38 +1,22 @@
 package me.codplaymakers.com;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.GridLayout;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
-import javax.swing.JTabbedPane;
-import javax.swing.JComboBox;
-import javax.swing.JTextPane;
-import javax.swing.JSpinner;
-import javax.swing.JScrollBar;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JRadioButton;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-
-
-
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.border.EmptyBorder;
 //package WindowBuilder;
-
-import java.sql.Connection; 
-import java.sql.Date; 
-import java.sql.DriverManager; 
-import java.sql.PreparedStatement; 
-import java.sql.ResultSet; 
-import java.sql.SQLException; 
-import java.sql.Statement; 
 
 
 
@@ -93,7 +77,7 @@ public class WindowBuilderTEst extends JFrame {
 		contentPane.add(cbsparte);
 		
 		JTextPane txtpnVertrag = new JTextPane();
-		txtpnVertrag.setText("Tätigkeit");
+		txtpnVertrag.setText("Tï¿½tigkeit");
 		txtpnVertrag.setBounds(0, 31, 68, 20);
 		contentPane.add(txtpnVertrag);
 		

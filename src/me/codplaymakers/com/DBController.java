@@ -20,14 +20,12 @@ import javax.swing.JRadioButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 */
-import java.sql.Connection; 
-import java.sql.Date; 
-import java.sql.DriverManager; 
-import java.sql.PreparedStatement; 
-import java.sql.ResultSet; 
-import java.sql.SQLException; 
-import java.sql.Statement; 
-import java.sql.Timestamp;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 class DBController 
 { 
@@ -96,7 +94,7 @@ class DBController
     	return i;
     }
     
-    //Beispielklasse für Diagramm Schnittstelle (Ziele)
+    //Beispielklasse fï¿½r Diagramm Schnittstelle (Ziele)
     
     public int ausgabeDiagrammZiele()
     {
@@ -133,7 +131,7 @@ class DBController
         }); 
     } */
     
-    // Beispiel Ausgabe um die Variablen zu überprüfen - Ziele
+    // Beispiel Ausgabe um die Variablen zu ï¿½berprï¿½fen - Ziele
     
     public void ausgabeZiele()
     {
@@ -146,7 +144,7 @@ class DBController
 	            System.out.println("ID = " + rs.getInt("id")); 
 	            System.out.println("Taetigkeit = " + rs.getString("taetigkeit")); 
 	            System.out.println("Sparte = " + rs.getString("sparte")); 
-	            System.out.println("Prämie = " + rs.getDouble("praemie")); 
+	            System.out.println("Prï¿½mie = " + rs.getDouble("praemie")); 
 	            System.out.println("Netto Provision = " + rs.getDouble("netto_provison"));
 	            System.out.println("Crossseling = " + rs.getString("crossselling"));
 	            System.out.println("Provisionssatz = " + rs.getDouble("provisionssatz"));
@@ -163,7 +161,7 @@ class DBController
     	
     }
     	
-    //Beispiel Ausgabeklasse für den Bestand
+    //Beispiel Ausgabeklasse fï¿½r den Bestand
     public void ausgabeBestand()
     {
     	try
@@ -175,7 +173,7 @@ class DBController
             System.out.println("ID = " + rs.getInt("id")); 
             System.out.println("Taetigkeit = " + rs.getString("taetigkeit")); 
             System.out.println("Sparte = " + rs.getString("sparte")); 
-            System.out.println("Prämie = " + rs.getDouble("praemie")); 
+            System.out.println("Prï¿½mie = " + rs.getDouble("praemie")); 
             System.out.println("Netto Provision = " + rs.getDouble("netto_provison"));
             System.out.println("Crossseling = " + rs.getString("crossselling"));
             System.out.println("Provisionssatz = " + rs.getDouble("provisionssatz"));
@@ -192,7 +190,7 @@ class DBController
     	 
     }
     
-    // Insert Klasse für Schnittstelle zur Benutzereingabe - Ziele
+    // Insert Klasse fï¿½r Schnittstelle zur Benutzereingabe - Ziele
     
     public void insertZiele(String taetigkeit, String sparte, Double praemie, Double netto_provision, String crossselling, Double provisionssatz)
     {
@@ -227,7 +225,7 @@ class DBController
     	
     }
     
- // Insert Klasse für Schnittstelle zur Benutzereingabe - Bestand
+ // Insert Klasse fï¿½r Schnittstelle zur Benutzereingabe - Bestand
     public void insertBestand(String taetigkeit, String sparte, Double praemie, Double netto_provision, String crossselling, Double provisionssatz)
     {
     	
@@ -262,7 +260,7 @@ class DBController
     }
     
     // Create Tabellen Ziele und Bestand
-    // Insert für die oben genannten Tabellen
+    // Insert fï¿½r die oben genannten Tabellen
     protected void handleDB() 
     { 
         try { 

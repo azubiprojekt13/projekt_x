@@ -1,11 +1,13 @@
 package me.codplaymakers.com;
 
-import org.jfree.chart.*;
 import java.awt.Dimension;
-import org.jfree.ui.ApplicationFrame;
-import org.jfree.data.category.DefaultCategoryDataset;
+
 import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 
 /**

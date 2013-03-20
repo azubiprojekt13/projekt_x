@@ -1,22 +1,18 @@
 package me.codplaymakers.com;
 
-import javax.swing.*;
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-
-import java.awt.GridLayout;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.SQLException;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextPane;
 
 public class Eingabe 
 	extends JFrame {
@@ -34,7 +30,7 @@ tabeingabe.setLayout(null);
 		
 		JTextPane txtpnVertrag = new JTextPane();
 		txtpnVertrag.setEditable(false);
-		txtpnVertrag.setText("Tätigkeit");
+		txtpnVertrag.setText("Tï¿½tigkeit");
 		txtpnVertrag.setBounds(35, 5, 47, 20);
 		tabeingabe.add(txtpnVertrag);
 		
@@ -46,7 +42,7 @@ tabeingabe.setLayout(null);
 		
 		JTextPane txtpnPrmie = new JTextPane();
 		txtpnPrmie.setEditable(false);
-		txtpnPrmie.setText("Nettojahresprämie");
+		txtpnPrmie.setText("Nettojahresprï¿½mie");
 		txtpnPrmie.setBounds(135, 5, 95, 20);
 		tabeingabe.add(txtpnPrmie);
 		
