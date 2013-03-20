@@ -1,8 +1,7 @@
 package me.codplaymakers.com;
 
-import java.awt.BorderLayout;
+/*import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -20,12 +19,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JRadioButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-
-
-
-//package WindowBuilder;
-
+*/
 import java.sql.Connection; 
 import java.sql.Date; 
 import java.sql.DriverManager; 
@@ -37,13 +31,11 @@ import java.sql.Timestamp;
 
 class DBController 
 { 
-	
-
-     
+   // Erstellt Datenbankverbindung 
    // private static final DBController dbcontroller = new DBController(); 
     private  Connection connection; 
+    // Legt den Standartpfad auf das Heimverzeichnis des Benutzers
     private static final String DB_PATH = System.getProperty("user.home") + "/" + "testdb.db"; 
-
     
     static 
     { 
@@ -51,7 +43,7 @@ class DBController
         { 
             Class.forName("org.sqlite.JDBC"); 
         } catch (ClassNotFoundException e) 
-        
+    // Exception    
         { 
             System.err.println("Fehler beim Laden des JDBC-Treibers"); 
             e.printStackTrace(); 
@@ -104,6 +96,8 @@ class DBController
     	return i;
     }
     
+    //Beispielklasse für Diagramm Schnittstelle (Ziele)
+    
     public int ausgabeDiagrammZiele()
     {
     	int i = 0;
@@ -138,39 +132,46 @@ class DBController
             } 
         }); 
     } */
+    
+    // Beispiel Ausgabe um die Variablen zu überprüfen - Ziele
+    
     public void ausgabeZiele()
     {
-    	try
-    {
-    	Statement stmt = connection.createStatement(); 
-    	ResultSet rs = stmt.executeQuery("SELECT * FROM ziele;"); 
-        while (rs.next()) { 
-            System.out.println("ID = " + rs.getInt("id")); 
-            System.out.println("Taetigkeit = " + rs.getString("taetigkeit")); 
-            System.out.println("Sparte = " + rs.getString("sparte")); 
-            System.out.println("Prämie = " + rs.getDouble("praemie")); 
-            System.out.println("Netto Provision = " + rs.getDouble("netto_provison"));
-            System.out.println("Crossseling = " + rs.getString("crossselling"));
-            System.out.println("Provisionssatz = " + rs.getDouble("provisionssatz"));
-            System.out.println("Create Stamp = " + rs.getTimestamp("create_stamp"));
-            System.out.println("Update Stamp = " + rs.getTimestamp("update_stamp"));
-        }
-        rs.close(); 
-    } catch (SQLException e) 
-    
-    { 
-        System.err.println("Couldn't handle DB-Query"); 
-        e.printStackTrace(); 
-    }
+	    	try
+	    {
+	    	Statement stmt = connection.createStatement(); 
+	    	ResultSet rs = stmt.executeQuery("SELECT * FROM ziele;"); 
+	        while (rs.next()) 
+	        { 
+	            System.out.println("ID = " + rs.getInt("id")); 
+	            System.out.println("Taetigkeit = " + rs.getString("taetigkeit")); 
+	            System.out.println("Sparte = " + rs.getString("sparte")); 
+	            System.out.println("Prämie = " + rs.getDouble("praemie")); 
+	            System.out.println("Netto Provision = " + rs.getDouble("netto_provison"));
+	            System.out.println("Crossseling = " + rs.getString("crossselling"));
+	            System.out.println("Provisionssatz = " + rs.getDouble("provisionssatz"));
+	            System.out.println("Create Stamp = " + rs.getTimestamp("create_stamp"));
+	            System.out.println("Update Stamp = " + rs.getTimestamp("update_stamp"));
+	        }
+	        rs.close(); 
+	    } catch (SQLException e) 
+	    
+	    { 
+	        System.err.println("Couldn't handle DB-Query"); 
+	        e.printStackTrace(); 
+	    }
+    	
     }
     	
+    //Beispiel Ausgabeklasse für den Bestand
     public void ausgabeBestand()
     {
     	try
     {
     	Statement stmt = connection.createStatement(); 
     	ResultSet rs = stmt.executeQuery("SELECT * FROM bestand;"); 
-        while (rs.next()) { 
+        while (rs.next()) 
+        { 
             System.out.println("ID = " + rs.getInt("id")); 
             System.out.println("Taetigkeit = " + rs.getString("taetigkeit")); 
             System.out.println("Sparte = " + rs.getString("sparte")); 
@@ -183,13 +184,16 @@ class DBController
         }
         rs.close(); 
     } catch (SQLException e) 
-    
+    // Exception
     { 
         System.err.println("Couldn't handle DB-Query"); 
         e.printStackTrace(); 
     } 
     	 
     }
+    
+    // Insert Klasse für Schnittstelle zur Benutzereingabe - Ziele
+    
     public void insertZiele(String taetigkeit, String sparte, Double praemie, Double netto_provision, String crossselling, Double provisionssatz)
     {
     	java.sql.Timestamp  sqlDate = new java.sql.Timestamp(new java.util.Date().getTime());
@@ -213,7 +217,7 @@ class DBController
          ps.addBatch();
          ps.executeBatch();
     	}
-    	
+    	//Exception
     	catch (SQLException e)
     	{ 
             System.err.println("Couldn't handle DB-Query"); 
@@ -222,6 +226,8 @@ class DBController
         }
     	
     }
+    
+ // Insert Klasse für Schnittstelle zur Benutzereingabe - Bestand
     public void insertBestand(String taetigkeit, String sparte, Double praemie, Double netto_provision, String crossselling, Double provisionssatz)
     {
     	
@@ -254,6 +260,9 @@ class DBController
         }
     	
     }
+    
+    // Create Tabellen Ziele und Bestand
+    // Insert für die oben genannten Tabellen
     protected void handleDB() 
     { 
         try { 
