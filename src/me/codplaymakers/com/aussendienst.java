@@ -22,15 +22,16 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JRadioButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+
 import javax.swing.JCheckBox;
+import javax.swing.JFormattedTextField;
 
 public class aussendienst extends JFrame {
 
 	public String [] daten ;
 	
 	private JPanel contentPane;
-	private JTextField txtpraemie;
-	private JTextField txtprovision;
 
 	/**
 	 * Launch the application.
@@ -60,29 +61,15 @@ public class aussendienst extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btneintragen = new JButton("Provision Berechnen");
-		btneintragen.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				
-//				double txtprov;
-//			
-//				double txtpraemie = Integer.parseInt(getName());
-//				txtprov = (txtpraemie*0.24*0.3);
-//				String txtpro = String.valueOf(txtprov);		
-//				txtprov.setText(txtprov);
-				
-			}
-		});
-		btneintragen.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+
+//		btneintragen.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
 				
 				
 				
-			}
-		});
-		btneintragen.setBounds(21, 213, 165, 23);
-		contentPane.add(btneintragen);
+//			}
+//		});
+
 		
 		String sparten[] = {"Leben", "Sach"};
 		JComboBox cbsparte = new JComboBox(sparten);
@@ -143,16 +130,6 @@ public class aussendienst extends JFrame {
 		rb40.setBounds(56, 148, 54, 23);
 		contentPane.add(rb40);
 		
-		txtpraemie = new JTextField();
-		txtpraemie.setBounds(183, 62, 97, 20);
-		contentPane.add(txtpraemie);
-		txtpraemie.setColumns(10);
-		
-		txtprovision = new JTextField();
-		txtprovision.setBounds(299, 62, 76, 20);
-		contentPane.add(txtprovision);
-		txtprovision.setColumns(10);
-		
 		//final csvErzeugen blubb = new csvErzeugen();
 		
 		JButton btnAblegen = new JButton("Ablegen");
@@ -189,7 +166,37 @@ public class aussendienst extends JFrame {
 	    group.add(rb30);
 	    group.add(rb40);
 	    group.add(rb50);
+	    
+	    final JFormattedTextField ftfpraemie = new JFormattedTextField();
+	    ftfpraemie.setBounds(183, 62, 97, 20);
+	    contentPane.add(ftfpraemie);
+	    
+	    final JFormattedTextField ftfprov = new JFormattedTextField();
+	    ftfprov.setBounds(299, 62, 76, 20);
+	    contentPane.add(ftfprov);
 
+		JButton btneintragen = new JButton("Provision Berechnen");
+		btneintragen.setBounds(21, 213, 165, 23);
+		contentPane.add(btneintragen);
+		btneintragen.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+			
+			try
+			{
+				double ergebnis, praemie;
+				praemie = Double.parseDouble(ftfpraemie.getText());
+				ergebnis = (praemie*0.24*0.3);
+				ftfprov.setText(String.valueOf(ergebnis));
+			}
+			catch(SQLException e)
+			{
+				System.err.println("Fehler!");
+				e.printStackTrace();
+			}
+				
+			}
+		});
 	
 
 	
