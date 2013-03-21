@@ -15,9 +15,9 @@ public class datenbanktest {
         //dbc.insertBestand("abc", "dfg", 12.5, 54.3, "yes", 30.0);
         dbc.insertZielsetzungen("blabla", "jkdfalkdsj", 5.0, 6.0);
         //dbc.ausgabeBestand();
-       // dbc.ausgabeZiele();
-        dbc.ausgabeDiagrammBestand("03");
-        System.out.println(String.valueOf(dbc.ausgabeDiagrammZiele()));
+        dbc.ausgabeZiele();
+       // dbc.ausgabeDiagrammBestand("03");
+        //System.out.println(String.valueOf(dbc.ausgabeDiagrammZiele()));
 	}
 
 }

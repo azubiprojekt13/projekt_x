@@ -26,6 +26,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.io.*;
 
 class DBController 
 { 
@@ -33,7 +34,7 @@ class DBController
    // private static final DBController dbcontroller = new DBController(); 
     private  Connection connection; 
     // Legt den Standartpfad auf das Heimverzeichnis des Benutzers
-    private static final String DB_PATH = System.getProperty("user.home") + "/" + "testdb.db"; 
+    private static final String DB_PATH = System.getProperty("user.home") + "/" + "produktionsliste.db"; 
     
     static 
     { 
@@ -50,12 +51,13 @@ class DBController
      
     protected DBController()
     { 
-    
+    	File f = new File(DB_PATH);
+    	if(!f.exists()) { 
+    		initDBConnection();
+    		InstallDB();
+    	}
     } 
      
- //   public static DBController getInstance(){ 
- //       return dbcontroller; 
-//    } 
      
     protected void initDBConnection() 
     { 
@@ -94,8 +96,7 @@ class DBController
     	return i;
     }
     
-    //Beispielklasse f�r Diagramm Schnittstelle (Ziele)
-    
+   
     public int ausgabeDiagrammZiele()
     {
     	int i = 0;
@@ -116,22 +117,6 @@ class DBController
     	return i;
     }
     
-/*       Runtime.getRuntime().addShutdownHook(new Thread() { 
-            public void run() { 
-                try { 
-                    if (!connection.isClosed() && connection != null) { 
-                        connection.close(); 
-                        if (connection.isClosed()) 
-                            System.out.println("Connection to Database closed"); 
-                    } 
-                } catch (SQLException e) { 
-                    e.printStackTrace(); 
-                } 
-            } 
-        }); 
-    } */
-    
-    // Beispiel Ausgabe um die Variablen zu �berpr�fen - Ziele
     
     public void ausgabeZiele()
     {
@@ -141,15 +126,10 @@ class DBController
 	    	ResultSet rs = stmt.executeQuery("SELECT * FROM ziele;"); 
 	        while (rs.next()) 
 	        { 
-	            System.out.println("ID = " + rs.getInt("id")); 
-	            System.out.println("Taetigkeit = " + rs.getString("taetigkeit")); 
-	            System.out.println("Sparte = " + rs.getString("sparte")); 
-	            System.out.println("Pr�mie = " + rs.getDouble("praemie")); 
-	            System.out.println("Netto Provision = " + rs.getDouble("netto_provison"));
-	            System.out.println("Crossseling = " + rs.getString("crossselling"));
-	            System.out.println("Provisionssatz = " + rs.getDouble("provisionssatz"));
-	            System.out.println("Create Stamp = " + rs.getTimestamp("create_stamp"));
-	            System.out.println("Update Stamp = " + rs.getTimestamp("update_stamp"));
+	            System.out.println("Taetigkeit = " + rs.getString("taetigkeit"));
+	            System.out.println("Sparte = " + rs.getString("sparte"));
+	            System.out.println("Anzahl = " + rs.getDouble("anzahl"));
+	            System.out.println("Provisionssumme = " + rs.getDouble("provisionssumme"));
 	        }
 	        rs.close(); 
 	    } catch (SQLException e) 
@@ -161,7 +141,7 @@ class DBController
     	
     }
     	
-    //Beispiel Ausgabeklasse f�r den Bestand
+   
     public void ausgabeBestand()
     {
     	try
@@ -190,9 +170,8 @@ class DBController
     	 
     }
     
-    // Insert Klasse f�r Schnittstelle zur Benutzereingabe - Ziele
-    
-    public void insertZielsetzungen(String taetigkeit, String sparte, Double anzanl_taetigkeiten, Double provisionsziel)
+     
+    public void insertZielsetzungen(String taetigkeit, String sparte, Double anzahl_taetigkeiten, Double provisionsziel)
     {
     	java.sql.Timestamp  sqlDate = new java.sql.Timestamp(new java.util.Date().getTime());
     	
@@ -206,7 +185,7 @@ class DBController
 
          ps.setString(1, taetigkeit);
          ps.setString(2, sparte);
-         ps.setDouble(3, anzanl_taetigkeiten);
+         ps.setDouble(3, anzahl_taetigkeiten);
          ps.setDouble(4, provisionsziel);  
          ps.addBatch();
          ps.executeBatch();
@@ -220,7 +199,7 @@ class DBController
         }
     	
     }
- // Insert Klasse f�r Schnittstelle zur Benutzereingabe - Bestand
+ 
     public void insertBestand(String taetigkeit, String sparte, Double praemie, Double netto_provision, String crossselling, Double provisionssatz)
     {
     	
@@ -254,42 +233,18 @@ class DBController
     	
     }
     
+    
     // Create Tabellen Ziele und Bestand
     // Insert f�r die oben genannten Tabellen
-    protected void handleDB() 
+    protected void InstallDB() 
     { 
         try { 
             Statement stmt = connection.createStatement(); 
-           //CREATE DROP
-            stmt.executeUpdate("DROP TABLE IF EXISTS bestand;"); 
             stmt.executeUpdate("CREATE TABLE bestand (id, taetigkeit, sparte, praemie, netto_provison, crossselling, provisionssatz, create_stamp, update_stamp);");
-            //stmt.executeUpdate("CREATE TABLE ziele (anzahl, taetigkeit, sparte, provisionssumme");
-            //INSERT 1
-           // stmt.execute("INSERT INTO bestand (id, taetigkeit, sparte, praemie, netto_provison, crossselling, provisionssatz, create_stamp, update_stamp) VALUES ('1', 'Termin', 'KFZ', '123', '', 'yes', '30', '09.09.2012', '09.09.2012')"); 
-             
-            PreparedStatement ps = connection 
-                    .prepareStatement("INSERT INTO bestand VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);"); 
-            
-         /*
-            //INSERT 2
-            ps.setInt(1, 1); 
-            ps.setString(2, "Vertraege");
-            ps.setString(3, "Leben");
-            ps.setDouble(4, 800.23);
-            ps.setDouble(5, 0);
-            ps.setString(6, "No");
-            ps.setDouble(7, 30);
-            ps.setDate(8, Date.valueOf("2011-05-16")); 
-            ps.setDate(9, Date.valueOf("2011-05-16"));  
-            ps.addBatch(); 
-*/
-
-
-            connection.setAutoCommit(false); 
-            ps.executeBatch(); 
+            stmt.executeUpdate("CREATE TABLE ziele (taetigkeit, sparte, anzahl, provisionssumme);");
             connection.setAutoCommit(true); 
-            
             connection.close(); 
+            connection=null;
         } catch (SQLException e) { 
             System.err.println("Couldn't handle DB-Query"); 
             e.printStackTrace(); 
