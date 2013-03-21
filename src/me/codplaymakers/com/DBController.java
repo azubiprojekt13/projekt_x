@@ -58,7 +58,6 @@ class DBController
     	}
     } 
      
-     
     protected void initDBConnection() 
     { 
         try 
@@ -96,7 +95,6 @@ class DBController
     	return i;
     }
     
-   
     public int ausgabeDiagrammZiele()
     {
     	int i = 0;
@@ -117,8 +115,8 @@ class DBController
     	return i;
     }
     
-    
     public void ausgabeZiele()
+
     {
 	    	try
 	    {
@@ -139,9 +137,31 @@ class DBController
 	        e.printStackTrace(); 
 	    }
     	
+    }   
+    
+    public void ausgabeIstZustand()
+    {
+    	try
+    {
+    	Statement stmt = connection.createStatement(); 
+    	ResultSet rs = stmt.executeQuery("SELECT * FROM istzustand;"); 
+        while (rs.next()) 
+        { 
+            System.out.println("Taetigkeit = " + rs.getString("taetigkeit"));
+            System.out.println("Sparte = " + rs.getString("sparte"));
+            System.out.println("Anzahl = " + rs.getDouble("anzahl"));
+            System.out.println("Provisionssumme = " + rs.getDouble("provisionssumme"));
+        }
+        rs.close(); 
+    } catch (SQLException e) 
+    
+    { 
+        System.err.println("Couldn't handle DB-Query"); 
+        e.printStackTrace(); 
     }
-    	
-   
+	
+}
+    
     public void ausgabeBestand()
     {
     	try
@@ -170,7 +190,7 @@ class DBController
     	 
     }
     
-     
+    // Insert Zielsetzung
     public void insertZielsetzungen(String taetigkeit, String sparte, Double anzahl_taetigkeiten, Double provisionsziel)
     {
     	java.sql.Timestamp  sqlDate = new java.sql.Timestamp(new java.util.Date().getTime());
@@ -181,6 +201,36 @@ class DBController
             
     	PreparedStatement ps = connection 
                 .prepareStatement("INSERT INTO ziele VALUES (?, ?, ?, ?);"); 
+    	
+
+         ps.setString(1, taetigkeit);
+         ps.setString(2, sparte);
+         ps.setDouble(3, anzahl_taetigkeiten);
+         ps.setDouble(4, provisionsziel);  
+         ps.addBatch();
+         ps.executeBatch();
+    	}
+    	//Exception
+    	catch (SQLException e)
+    	{ 
+            System.err.println("Couldn't handle DB-Query"); 
+            e.printStackTrace(); 
+            
+        }
+    	
+    }
+    // Befülle IST-Zustand
+    
+    public void insertistzustand(String taetigkeit, String sparte, Double anzahl_taetigkeiten, Double provisionsziel)
+    {
+    	java.sql.Timestamp  sqlDate = new java.sql.Timestamp(new java.util.Date().getTime());
+    	
+    	try 
+    	{ 
+            //Statement stmt = connection.createStatement();
+            
+    	PreparedStatement ps = connection 
+                .prepareStatement("INSERT INTO istzustand VALUES (?, ?, ?, ?);"); 
     	
 
          ps.setString(1, taetigkeit);
@@ -234,7 +284,7 @@ class DBController
     }
     
     
-    // Create Tabellen Ziele und Bestand
+    // Create Tabellen Ziele und Bestand und IST-Zustand
     // Insert fï¿½r die oben genannten Tabellen
     protected void InstallDB() 
     { 
@@ -242,6 +292,7 @@ class DBController
             Statement stmt = connection.createStatement(); 
             stmt.executeUpdate("CREATE TABLE bestand (id, taetigkeit, sparte, praemie, netto_provison, crossselling, provisionssatz, create_stamp, update_stamp);");
             stmt.executeUpdate("CREATE TABLE ziele (taetigkeit, sparte, anzahl, provisionssumme);");
+            stmt.executeUpdate("CREATE TABLE istzustand (taetigkeit, sparte, anzahl, provisionssumme);");
             connection.setAutoCommit(true); 
             connection.close(); 
             connection=null;
