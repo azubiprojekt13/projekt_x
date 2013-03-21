@@ -310,13 +310,13 @@ public class Eingabe
 		JTextPane txtpnabschlussquote = new JTextPane();
 		txtpnabschlussquote.setBackground(SystemColor.menu);
 		txtpnabschlussquote.setText("Abschlussquote");
-		txtpnabschlussquote.setBounds(10, 11, 81, 20);
+		txtpnabschlussquote.setBounds(10, 11, 132, 20);
 		tabzusammenfassung.add(txtpnabschlussquote);
 		
 		JTextPane txtpnstornoquote = new JTextPane();
 		txtpnstornoquote.setBackground(SystemColor.menu);
 		txtpnstornoquote.setText("Stornoquote");
-		txtpnstornoquote.setBounds(10, 42, 81, 20);
+		txtpnstornoquote.setBounds(10, 42, 120, 20);
 		tabzusammenfassung.add(txtpnstornoquote);
 		
 		JTextPane txtpndiagramme = new JTextPane();
