@@ -310,41 +310,61 @@ public class Eingabe
 		JTextPane txtpnabschlussquote = new JTextPane();
 		txtpnabschlussquote.setBackground(SystemColor.menu);
 		txtpnabschlussquote.setText("Abschlussquote");
-		txtpnabschlussquote.setBounds(10, 11, 132, 20);
+		txtpnabschlussquote.setBounds(10, 223, 132, 20);
 		tabzusammenfassung.add(txtpnabschlussquote);
 		
 		JTextPane txtpnstornoquote = new JTextPane();
 		txtpnstornoquote.setBackground(SystemColor.menu);
 		txtpnstornoquote.setText("Stornoquote");
-		txtpnstornoquote.setBounds(10, 42, 120, 20);
+		txtpnstornoquote.setBounds(10, 248, 120, 20);
 		tabzusammenfassung.add(txtpnstornoquote);
 		
 		JTextPane txtpndiagramme = new JTextPane();
 		txtpndiagramme.setBackground(SystemColor.menu);
 		txtpndiagramme.setText("Diagramme:");
-		txtpndiagramme.setBounds(10, 90, 81, 20);
+		txtpndiagramme.setBounds(10, 92, 81, 20);
 		tabzusammenfassung.add(txtpndiagramme);
 		
+		JTextPane txtpnzfSparte = new JTextPane();
+		txtpnzfSparte.setBackground(SystemColor.menu);
+		txtpnzfSparte.setEditable(false);
+		txtpnzfSparte.setText("Sparte");
+		txtpnzfSparte.setBounds(10, 36, 66, 20);
+		tabzusammenfassung.add(txtpnzfSparte);
+		
+		JTextPane txtpnzfVertrag = new JTextPane();
+		txtpnzfVertrag.setBackground(SystemColor.menu);
+		txtpnzfVertrag.setEditable(false);
+		txtpnzfVertrag.setText("Tätigkeit");
+		txtpnzfVertrag.setBounds(10, 5, 132, 20);
+		tabzusammenfassung.add(txtpnzfVertrag);
+		
 	    final JFormattedTextField ftfaquote = new JFormattedTextField();
-	    ftfaquote.setBounds(152, 11, 154, 20);
+	    ftfaquote.setBounds(152, 223, 154, 20);
 	    tabzusammenfassung.add(ftfaquote);
 	    
 	    final JFormattedTextField ftfsquote = new JFormattedTextField();
-	    ftfsquote.setBounds(152, 42, 154, 20);
+	    ftfsquote.setBounds(152, 248, 154, 20);
 	    tabzusammenfassung.add(ftfsquote);
-	    
-		JButton ziel1 = new JButton("Abschlüsse pro Monat");
-		ziel1.setBounds(10, 121, 185, 23);
-		tabzusammenfassung.add(ziel1);
 		
-		JButton ziel2 = new JButton("Termine pro Monat");
-		ziel2.setBounds(10, 189, 185, 23);
+		JButton ziel2 = new JButton("pro Monat");
+		ziel2.setBounds(10, 123, 185, 23);
 		tabzusammenfassung.add(ziel2);
 		
 		JButton ziel3 = new JButton("Provisionsziel");
-		ziel3.setBounds(10, 155, 185, 23);
+		ziel3.setBounds(10, 157, 185, 23);
 		tabzusammenfassung.add(ziel3);
 		
+		final JComboBox cbzfsparte = new JComboBox();
+		cbzfsparte.setModel(new DefaultComboBoxModel(new String[] {"HRV", "WGV", "GLS", "PHV", "UNF", "KRV", "RSV", "LV", "   "}));
+		cbzfsparte.setSelectedItem(" ");
+		cbzfsparte.setBounds(152, 36, 154, 20);
+		tabzusammenfassung.add(cbzfsparte);
+		
+		final JComboBox cbzftaetigkeit = new JComboBox();
+		cbzftaetigkeit.setModel(new DefaultComboBoxModel(new String[] {"Neuabschluss", "Vertragsverl\u00E4ngerung", "Servicetermin", "Storno"}));
+		cbzftaetigkeit.setBounds(152, 5, 154, 20);
+		tabzusammenfassung.add(cbzftaetigkeit);
 		
 		tabbedPane.addTab("Zusammenfassung", tabzusammenfassung);
 	}
@@ -379,13 +399,13 @@ public class Eingabe
 		txtpnprovision.setBounds(10, 104, 76, 20);
 		tabziele.add(txtpnprovision);
 		
-		JSpinner spinner = new JSpinner();
-		spinner.setBounds(118, 73, 143, 20);
-		tabziele.add(spinner);
+		final JSpinner sanzahl = new JSpinner();
+		sanzahl.setBounds(118, 73, 143, 20);
+		tabziele.add(sanzahl);
 		
-		JButton button = new JButton("Ablegen");
-		button.setBounds(10, 245, 154, 23);
-		tabziele.add(button);
+		JButton zablegen = new JButton("Ablegen");
+		zablegen.setBounds(10, 245, 154, 23);
+		
 		
 		final JComboBox cbztaetigkeit = new JComboBox();
 		cbztaetigkeit.setModel(new DefaultComboBoxModel(new String[] {"Neuabschluss", "Vertragsverl\u00E4ngerung", "Servicetermin", "Storno"}));
@@ -401,8 +421,35 @@ public class Eingabe
 	    final JFormattedTextField ftfprovision = new JFormattedTextField();
 	    ftfprovision.setBounds(118, 104, 143, 20);
 	    tabziele.add(ftfprovision);
+	    
+		final JCheckBox cbSollIst = new JCheckBox();
+		cbSollIst.setBounds(10, 163, 143, 20);
+		cbSollIst.setText("Soll");
+		cbSollIst.setSelected(true);
+		tabziele.add(cbSollIst);
 		
-		
+		zablegen.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				 String taetigkeit = cbztaetigkeit.getSelectedItem().toString();
+				 String sparte = cbzsparte.getSelectedItem().toString();
+				 Double anzahl_taetigkeiten = Double.valueOf(sanzahl.getValue().toString());
+				 Double provisionsziel = Double.valueOf(ftfprovision.getText());
+				
+		if (cbSollIst.isSelected()){
+			dbc.insertZielsetzungen(taetigkeit, sparte, anzahl_taetigkeiten, provisionsziel);
+		    dbc.ausgabeZiele();
+		} else{
+			dbc.insertistzustand(taetigkeit, sparte, anzahl_taetigkeiten, provisionsziel);
+			dbc.ausgabeIstZustand();
+		}
+				
+
+				
+			}
+		});
+		tabziele.add(zablegen);
 		
 		tabbedPane.addTab("Ziele", tabziele);
 
