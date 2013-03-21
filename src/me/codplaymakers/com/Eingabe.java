@@ -1,25 +1,6 @@
 package me.codplaymakers.com;
 
 import javax.swing.*;
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-
-import java.awt.GridLayout;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.sql.SQLException;
-
-import javax.swing.JCheckBox;
-import javax.swing.JFormattedTextField;
-import java.awt.Point;
-import java.awt.Color;
-import java.awt.SystemColor;
 
 public class Eingabe 
 	extends JFrame {
@@ -95,7 +76,7 @@ public class Eingabe
 				//final csvErzeugen blubb = new csvErzeugen();
 				
 				JButton btnAblegen = new JButton("Ablegen");
-				
+				//
 
 					btnAblegen.setBounds(265, 207, 154, 23);
 					tabeingabe.add(btnAblegen);
@@ -134,61 +115,117 @@ public class Eingabe
 					    				double ergebnis, praemie;
 
 
-					    				if (cbsparte.getSelectedItem()=="HRV") 
+					    				if ((cbsparte.getSelectedItem()=="HRV") && (cbtaetigkeit.getSelectedItem()=="Vertragsabschluss"))
 					    				{
 					    				praemie = Double.parseDouble(ftfpraemie.getText());
 					    				ergebnis = (praemie*0.2);
 					    				ftfprov.setText(String.valueOf(ergebnis));
 					    				}
 					    				
-					    				if (cbsparte.getSelectedItem()=="WGV") 
+					    				else if ((cbsparte.getSelectedItem()=="WGV") && (cbtaetigkeit.getSelectedItem()=="Vertragsabschluss")) 
 					    				{
 					    				praemie = Double.parseDouble(ftfpraemie.getText());
 					    				ergebnis = (praemie*0.24);
 					    				ftfprov.setText(String.valueOf(ergebnis));
 					    				}
 					    				
-					    				if(cbsparte.getSelectedItem()=="GLS") 
+					    				else if ((cbsparte.getSelectedItem()=="GLS") && (cbtaetigkeit.getSelectedItem()=="Vertragsabschluss")) 
 					    				{
 					    				praemie = Double.parseDouble(ftfpraemie.getText());
 					    				ergebnis = (praemie*0.18);
 					    				ftfprov.setText(String.valueOf(ergebnis));
 					    				}
 					    				
-					    				if(cbsparte.getSelectedItem()=="PHV") 
+					    				else if ((cbsparte.getSelectedItem()=="PHV") && (cbtaetigkeit.getSelectedItem()=="Vertragsabschluss"))
 					    				{
 					    				praemie = Double.parseDouble(ftfpraemie.getText());
 					    				ergebnis = (praemie*0.17);
 					    				ftfprov.setText(String.valueOf(ergebnis));
 					    				}
 					    				
-					    				if(cbsparte.getSelectedItem()=="UNF") 
+					    				else if ((cbsparte.getSelectedItem()=="UNF") && (cbtaetigkeit.getSelectedItem()=="Vertragsabschluss"))
 					    				{
 					    				praemie = Double.parseDouble(ftfpraemie.getText());
 					    				ergebnis = (praemie*0.21);
 					    				ftfprov.setText(String.valueOf(ergebnis));
 					    				}
 					    				
-					    				if(cbsparte.getSelectedItem()=="KRV") 
+					    				else if ((cbsparte.getSelectedItem()=="KRV") && (cbtaetigkeit.getSelectedItem()=="Vertragsabschluss")) 
 					    				{
 					    				praemie = Double.parseDouble(ftfpraemie.getText());
 					    				ergebnis = (((praemie/12)*5)*0.3);
 					    				ftfprov.setText(String.valueOf(ergebnis));
 					    				}
 					    				
-					    				if(cbsparte.getSelectedItem()=="RSV") 
+					    				else if ((cbsparte.getSelectedItem()=="RSV") && (cbtaetigkeit.getSelectedItem()=="Vertragsabschluss"))
 					    				{
 					    				praemie = Double.parseDouble(ftfpraemie.getText());
 					    				ergebnis = ((praemie*0.5)*0.3);
 					    				ftfprov.setText(String.valueOf(ergebnis));
 					    				}
 					    				
-					    				if(cbsparte.getSelectedItem()=="LV") 
+					    				else if((cbsparte.getSelectedItem()=="LV") && (cbtaetigkeit.getSelectedItem()=="Vertragsabschluss")) 
 					    				{
 					    				praemie = Double.parseDouble(ftfpraemie.getText());
 					    				ergebnis = (praemie/0.0275*0.3);
 					    				ftfprov.setText(String.valueOf(ergebnis));
 					    				}
+			    						else if((cbsparte.getSelectedItem()=="HRV") && (cbtaetigkeit.getSelectedItem()=="Storno")) 
+			    						{
+			    						praemie = Double.parseDouble(ftfpraemie.getText());
+					    				ergebnis = (praemie*(-0.2));
+			    						ftfprov.setText(String.valueOf(ergebnis));
+			    						}
+			    						
+			    						else if((cbsparte.getSelectedItem()=="WGV") && (cbtaetigkeit.getSelectedItem()=="Storno")) 
+			    						{
+			    						praemie = Double.parseDouble(ftfpraemie.getText());
+					    				ergebnis = (praemie*(-0.24));
+			    						ftfprov.setText(String.valueOf(ergebnis));
+			    						}
+			    						
+			    						else if((cbsparte.getSelectedItem()=="GLS") && (cbtaetigkeit.getSelectedItem()=="Storno")) 
+			    						{
+			    						praemie = Double.parseDouble(ftfpraemie.getText());
+					    				ergebnis = (praemie*(-0.18));
+			    						ftfprov.setText(String.valueOf(ergebnis));
+			    						}
+			    						
+			    						else if((cbsparte.getSelectedItem()=="PHV") && (cbtaetigkeit.getSelectedItem()=="Storno")) 
+			    						{
+			    						praemie = Double.parseDouble(ftfpraemie.getText());
+					    				ergebnis = (praemie*(-0.17));
+			    						ftfprov.setText(String.valueOf(ergebnis));
+			    						}
+			    						
+			    						else if((cbsparte.getSelectedItem()=="UNF") && (cbtaetigkeit.getSelectedItem()=="Storno")) 
+			    						{
+			    						praemie = Double.parseDouble(ftfpraemie.getText());
+					    				ergebnis = (praemie*(-0.21));
+			    						ftfprov.setText(String.valueOf(ergebnis));
+			    						}
+			    						
+			    						else if((cbsparte.getSelectedItem()=="KRV") && (cbtaetigkeit.getSelectedItem()=="Storno")) 
+			    						{
+			    						praemie = Double.parseDouble(ftfpraemie.getText());
+					    				ergebnis = (((praemie/12)*5)*(-0.3));
+			    						ftfprov.setText(String.valueOf(ergebnis));
+			    						}
+			    						
+			    						else if((cbsparte.getSelectedItem()=="RSV") && (cbtaetigkeit.getSelectedItem()=="Storno")) 
+			    						{
+			    						praemie = Double.parseDouble(ftfpraemie.getText());
+					    				ergebnis = ((praemie*0.5)*(-0.3));
+			    						ftfprov.setText(String.valueOf(ergebnis));
+			    						}
+					    				
+			    						else 
+			    						{
+			    						praemie = Double.parseDouble(ftfpraemie.getText());
+			    						ergebnis = (praemie/0.0275*(-0.3));
+			    						ftfprov.setText(String.valueOf(ergebnis));
+			    						}
+
 					    				
 					    			}
 					    				
@@ -272,11 +309,12 @@ public class Eingabe
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 432, 315);
 
+		
 
 		  EingabeTabErzeugen();
 		  ZusammenfassungTabErzeugen();
 		  ZieleTabErzeugen();
-		  
+			setContentPane(tabbedPane);
 		
 
 	
