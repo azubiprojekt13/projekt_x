@@ -176,7 +176,6 @@ class DBController
             System.out.println("Pr�mie = " + rs.getDouble("praemie")); 
             System.out.println("Netto Provision = " + rs.getDouble("netto_provison"));
             System.out.println("Crossseling = " + rs.getString("crossselling"));
-            System.out.println("Provisionssatz = " + rs.getDouble("provisionssatz"));
             System.out.println("Create Stamp = " + rs.getTimestamp("create_stamp"));
             System.out.println("Update Stamp = " + rs.getTimestamp("update_stamp"));
         }
