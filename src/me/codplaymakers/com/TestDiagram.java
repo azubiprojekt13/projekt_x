@@ -7,6 +7,8 @@ public class TestDiagram {
 		
 		    /*KreisDiagramm demo = new KreisDiagramm("Vergleich", "Test");
 		    demo.AddValue("TEst1",20.5);
+		    
+		    sssss
 		    demo.AddValue("TEST2",30.1);
 		    demo.createDiagramm();
 		    demo.pack();
