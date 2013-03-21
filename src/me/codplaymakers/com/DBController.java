@@ -176,6 +176,7 @@ class DBController
             System.out.println("Pr�mie = " + rs.getDouble("praemie")); 
             System.out.println("Netto Provision = " + rs.getDouble("netto_provison"));
             System.out.println("Crossseling = " + rs.getString("crossselling"));
+            System.out.println("Provisionssatz = " + rs.getDouble("provisionssatz"));
             System.out.println("Create Stamp = " + rs.getTimestamp("create_stamp"));
             System.out.println("Update Stamp = " + rs.getTimestamp("update_stamp"));
         }
@@ -249,7 +250,7 @@ class DBController
     	
     }
  
-    public void insertBestand(String taetigkeit, String sparte, Double praemie, Double netto_provision, String crossselling)
+    public void insertBestand(String taetigkeit, String sparte, Double praemie, Double netto_provision, String crossselling, Double provisionssatz)
     {
     	
     	long timestamp = System.currentTimeMillis()/1000;
@@ -258,7 +259,7 @@ class DBController
             //Statement stmt = connection.createStatement();
             
     	PreparedStatement ps = connection 
-                .prepareStatement("INSERT INTO bestand VALUES (?, ?, ?, ?, ?, ?, ?, ?);"); 
+                .prepareStatement("INSERT INTO bestand VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);"); 
     	
     	 ps.setInt(1, 1); 
          ps.setString(2, taetigkeit);
@@ -266,8 +267,9 @@ class DBController
          ps.setDouble(4, praemie);
          ps.setDouble(5, netto_provision);
          ps.setString(6, crossselling);
-         ps.setLong(7, timestamp); 
-         ps.setLong(8, timestamp);  
+         ps.setDouble(7, provisionssatz);
+         ps.setLong(8, timestamp); 
+         ps.setLong(9, timestamp);  
          ps.addBatch();
          ps.executeBatch();
     	}
@@ -288,7 +290,7 @@ class DBController
     { 
         try { 
             Statement stmt = connection.createStatement(); 
-            stmt.executeUpdate("CREATE TABLE bestand (id, taetigkeit, sparte, praemie, netto_provison, crossselling, create_stamp, update_stamp);");
+            stmt.executeUpdate("CREATE TABLE bestand (id, taetigkeit, sparte, praemie, netto_provison, crossselling, provisionssatz, create_stamp, update_stamp);");
             stmt.executeUpdate("CREATE TABLE ziele (taetigkeit, sparte, anzahl, provisionssumme);");
             stmt.executeUpdate("CREATE TABLE istzustand (taetigkeit, sparte, anzahl, provisionssumme);");
             connection.setAutoCommit(true); 
