@@ -12,8 +12,8 @@ public class datenbanktest {
         DBController dbc = new DBController(); 
         dbc.initDBConnection(); 
         //dbc.handleDB(); 
-        dbc.insertBestand("abc", "dfg", 12.5, 54.3, "yes", 30.0);
-        //dbc.insertZiele("Zgt", "Guf", 17.5, 47.2, "no", 40.0);
+        //dbc.insertBestand("abc", "dfg", 12.5, 54.3, "yes", 30.0);
+        dbc.insertZielsetzungen("blabla", "jkdfalkdsj", 5.0, 6.0);
         //dbc.ausgabeBestand();
        // dbc.ausgabeZiele();
         dbc.ausgabeDiagrammBestand("03");

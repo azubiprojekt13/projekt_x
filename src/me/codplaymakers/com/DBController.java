@@ -192,7 +192,7 @@ class DBController
     
     // Insert Klasse f�r Schnittstelle zur Benutzereingabe - Ziele
     
-    public void insertZiele(String taetigkeit, String sparte, Double praemie, Double netto_provision, String crossselling, Double provisionssatz)
+    public void insertZielsetzungen(String taetigkeit, String sparte, Double anzanl_taetigkeiten, Double provisionsziel)
     {
     	java.sql.Timestamp  sqlDate = new java.sql.Timestamp(new java.util.Date().getTime());
     	
@@ -201,17 +201,13 @@ class DBController
             //Statement stmt = connection.createStatement();
             
     	PreparedStatement ps = connection 
-                .prepareStatement("INSERT INTO ziele VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);"); 
+                .prepareStatement("INSERT INTO ziele VALUES (?, ?, ?, ?);"); 
     	
-    	 ps.setInt(1, 1); 
-         ps.setString(2, taetigkeit);
-         ps.setString(3, sparte);
-         ps.setDouble(4, praemie);
-         ps.setDouble(5, netto_provision);
-         ps.setString(6, crossselling);
-         ps.setDouble(7, provisionssatz);
-         ps.setTimestamp(8, sqlDate); 
-         ps.setTimestamp(9, sqlDate);  
+
+         ps.setString(1, taetigkeit);
+         ps.setString(2, sparte);
+         ps.setDouble(3, anzanl_taetigkeiten);
+         ps.setDouble(4, provisionsziel);  
          ps.addBatch();
          ps.executeBatch();
     	}
@@ -224,7 +220,6 @@ class DBController
         }
     	
     }
-    
  // Insert Klasse f�r Schnittstelle zur Benutzereingabe - Bestand
     public void insertBestand(String taetigkeit, String sparte, Double praemie, Double netto_provision, String crossselling, Double provisionssatz)
     {
@@ -300,4 +295,6 @@ class DBController
             e.printStackTrace(); 
         } 
     } 
+    
+    
 }
