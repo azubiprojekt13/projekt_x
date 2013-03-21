@@ -10,6 +10,8 @@ public class TestDiagram {
 		    demo.AddValue("TEST2",30.1);
 		    demo.createDiagramm();
 		    demo.pack();
+		    
+		    tada
 	        demo.setVisible(true);*/
 	        Balkendiagramm balken1 = new Balkendiagramm("Dia1", 5.0, 7.0);
 	        balken1.pack();
