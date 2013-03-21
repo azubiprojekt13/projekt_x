@@ -75,9 +75,10 @@ class DBController
         } 
     }
     
-    public int ausgabeDiagrammBestand(String Monat)
+    public int ausgabeDiagrammBestand()
     {
     	int i = 0;
+    	String monat = System.currentTimeMillis()/1000 strftime('%m',datetime(update_stamp,'unixepoch')
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
@@ -97,7 +98,7 @@ class DBController
     
     public double ausgabeDiagrammZiele(String taetigkeit, String sparte)
     {
-    	double anzahl = 0.0;
+    	Double anzahl = 0.0;
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
@@ -115,7 +116,7 @@ class DBController
     	return anzahl;
     }
     
-    public double ausgabeDiagrammProv(String taetigkeit, String sparte)
+    public double ausgabeDiagrammProv()
     {
     	double provsumme = 0;
     	try
