@@ -259,34 +259,7 @@ public class Eingabe
 	
 	);
 					    		
-					    				btnAblegen.addMouseListener(new MouseAdapter() {
-					    					@Override
-					    					public void mouseClicked(MouseEvent arg0) {
-					    						
-					    		
-					    						/*daten = new String [4]; //4 = anzahl an elementen
-					    						daten[0] = cbtaetigkeit.getSelectedItem().toString();
-					    						txtprov.setText(daten[0]);
-					    						blubb.generateCsvFile(daten);*/
-					    						
-					    						String taetigkeit = cbtaetigkeit.getSelectedItem().toString();
-					    						String sparte = cbsparte.getSelectedItem().toString();
-					    						Double praemie = Double.valueOf(ftfpraemie.getText());
-					    						Double netto_provision = Double.valueOf(ftfprov.getText());
-					    						String crossselling;
-					    						if(chckbxCrossseling.isSelected()) {
-					    							crossselling="yes";
-					    							
-					    						}
-					    						else {
-					    							crossselling = "no";
-					    						};
-					    					
-					    						
-//					    						dbc.insert(taetigkeit, sparte, praemie, netto_provision, crossselling,0.0);
-//					    						dbc.ausgabe();
-					    					}
-					    				});
+
 					    				tabbedPane.addTab("Eingabe", tabeingabe);
 					    				
 					    				JFormattedTextField formattedTextField = new JFormattedTextField();
@@ -319,6 +292,34 @@ public class Eingabe
 		JButton button = new JButton("Ablegen");
 		button.setBounds(265, 207, 154, 23);
 		tabziele.add(button);
+		
+		btnAblegen.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+
+				/*daten = new String [4]; //4 = anzahl an elementen
+				daten[0] = cbtaetigkeit.getSelectedItem().toString();
+				txtprov.setText(daten[0]);
+				blubb.generateCsvFile(daten);*/
+				
+				String taetigkeit = cbtaetigkeit.getSelectedItem().toString();
+				String sparte = cbsparte.getSelectedItem().toString();
+				Double praemie = Double.valueOf(ftfpraemie.getText());
+				Double netto_provision = Double.valueOf(ftfprov.getText());
+				String crossselling;
+				if(chckbxCrossseling.isSelected()) {
+					crossselling="yes";
+					
+				}
+				else {
+					crossselling = "no";
+				};
+			
+				dbc.insertBestand(taetigkeit, sparte, praemie, netto_provision, crossselling);
+				dbc.ausgabeBestand();
+			}
+		});
 		
 		
 	}
