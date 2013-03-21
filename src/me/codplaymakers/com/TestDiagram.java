@@ -5,12 +5,17 @@ public class TestDiagram {
 
 	public static void main(String[] args) {
 		
-		    KreisDiagramm demo = new KreisDiagramm("Vergleich", "Test");
+		    /*KreisDiagramm demo = new KreisDiagramm("Vergleich", "Test");
 		    demo.AddValue("TEst1",20.5);
 		    demo.AddValue("TEST2",30.1);
 		    demo.createDiagramm();
 		    demo.pack();
-	        demo.setVisible(true);
+	        demo.setVisible(true);*/
+	        Balkendiagramm balken1 = new Balkendiagramm("Dia1", 5.0, 7.0);
+	        balken1.pack();
+	        balken1.setVisible(true);
+	       
+	        
 	}
 
 }

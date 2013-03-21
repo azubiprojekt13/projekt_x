@@ -95,16 +95,16 @@ class DBController
     	return i;
     }
     
-    public int ausgabeDiagrammZiele()
+    public double ausgabeDiagrammZiele(String taetigkeit, String sparte)
     {
-    	int i = 0;
+    	double anzahl = 0.0;
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT * FROM ziele;"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM ziele where taetigkeit = '"+taetigkeit+"' and sparte = '"+sparte+"';"); 
 	        while (rs.next()) 
 	        {
-	        	i++;
+	        	anzahl=rs.getDouble("anzahl");
 	        }
     	}
     	catch (SQLException e) 
@@ -112,7 +112,27 @@ class DBController
             System.err.println("Couldn't handle DB-Query"); 
             e.printStackTrace(); 
         }
-    	return i;
+    	return anzahl;
+    }
+    
+    public double ausgabeDiagrammProv(String taetigkeit, String sparte)
+    {
+    	double provsumme = 0;
+    	try
+    	{
+	    	Statement stmt = connection.createStatement(); 
+	    	ResultSet rs = stmt.executeQuery("SELECT provisionssumme FROM ziele where provisionssumme IS NOT NULL"); 
+	        while (rs.next()) 
+	        {
+	        	provsumme = rs.getDouble("provisionssumme");
+	        }
+    	}
+    	catch (SQLException e) 
+        { 
+            System.err.println("Couldn't handle DB-Query"); 
+            e.printStackTrace(); 
+        }
+    	return provsumme;
     }
     
     public void ausgabeZiele()
@@ -299,6 +319,5 @@ class DBController
             e.printStackTrace(); 
         } 
     } 
-    
     
 }
