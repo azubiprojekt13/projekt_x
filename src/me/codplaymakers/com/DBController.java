@@ -250,7 +250,7 @@ class DBController
     	
     }
  
-    public void insertBestand(String taetigkeit, String sparte, Double praemie, Double netto_provision, String crossselling, Double provisionssatz)
+    public void insertBestand(String taetigkeit, String sparte, Double praemie, Double netto_provision, String crossselling)
     {
     	
     	long timestamp = System.currentTimeMillis()/1000;
@@ -259,7 +259,7 @@ class DBController
             //Statement stmt = connection.createStatement();
             
     	PreparedStatement ps = connection 
-                .prepareStatement("INSERT INTO bestand VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);"); 
+                .prepareStatement("INSERT INTO bestand VALUES (?, ?, ?, ?, ?, ?, ?, ?);"); 
     	
     	 ps.setInt(1, 1); 
          ps.setString(2, taetigkeit);
@@ -267,9 +267,8 @@ class DBController
          ps.setDouble(4, praemie);
          ps.setDouble(5, netto_provision);
          ps.setString(6, crossselling);
-         ps.setDouble(7, provisionssatz);
-         ps.setLong(8, timestamp); 
-         ps.setLong(9, timestamp);  
+         ps.setLong(7, timestamp); 
+         ps.setLong(8, timestamp);  
          ps.addBatch();
          ps.executeBatch();
     	}
