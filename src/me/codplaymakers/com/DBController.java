@@ -141,10 +141,10 @@ class DBController
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT sum(provisionssumme) AS provisionssumme FROM bestand WHERE  strftime('%m',datetime(update_stamp,'unixepoch'))='"+Monat+"';"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT sum(provisionssumme) AS provisionssumme FROM bestand WHERE strftime('%m',datetime(update_stamp,'unixepoch')) = strftime('%m','now');"); 
 	        while (rs.next()) 
 	        {
-	        	provsumme = rs.getDouble("provisionssumme")
+	        	provsumme = rs.getDouble("provisionssumme");
 	        }
     	}
     	catch (SQLException e) 
@@ -258,7 +258,7 @@ class DBController
         }
     	
     }
-    // Bef�lle IST-Zustand
+    // Befuelle IST-Zustand
     
     public void insertistzustand(String taetigkeit, String sparte, Double anzahl_taetigkeiten, Double provisionsziel)
     {
