@@ -14,7 +14,7 @@ public class DiagrammAusZiel {
 		Balkendiagramm dia1 = new Balkendiagramm("Testdiagramm", 1.0, dbc.ausgabeDiagrammZiele("Neuabschluss", "WGV"));
         dia1.pack();
         dia1.setVisible(true);*/
-		KreisDiagramm dia2 = new KreisDiagramm("Provionsübersicht", "Provision");
+		KreisDiagramm dia2 = new KreisDiagramm("Provionsuebersicht", "Provision");
 		dia2.AddValue("Provisionsstand", dbc.
 		dia2.AddValue("Wunschprovision",dbc.ausgabeDiagrammProv());
 		

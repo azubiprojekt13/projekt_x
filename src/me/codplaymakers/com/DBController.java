@@ -75,13 +75,13 @@ class DBController
         } 
     }
     
-    public int ausgabeDiagrammBestand(String Monat)
+    public int ausgabeDiagrammBestand(String taetigkeit, String sparte)
     {
     	int i = 0;
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT * FROM bestand WHERE  strftime('%m',datetime(update_stamp,'unixepoch'))='"+Monat+"';"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT * FROM bestand WHERE  strftime('%m',datetime(update_stamp,'unixepoch'))= strftime('%m','now') AND taetigkeit = "+taetigkeit+" AND sparte ="+sparte+";"); 
 	        while (rs.next()) 
 	        {
 	        	i++;
@@ -115,7 +115,7 @@ class DBController
     	return anzahl;
     }
     
-    public double ausgabeDiagrammProv(String taetigkeit, String sparte)
+    public double ausgabeDiagrammProv()
     {
     	double provsumme = 0;
     	try
@@ -125,6 +125,26 @@ class DBController
 	        while (rs.next()) 
 	        {
 	        	provsumme = rs.getDouble("provisionssumme");
+	        }
+    	}
+    	catch (SQLException e) 
+        { 
+            System.err.println("Couldn't handle DB-Query"); 
+            e.printStackTrace(); 
+        }
+    	return provsumme;
+    }
+    
+    public double ausgabeDiagrammProvSumme()
+    {
+    	double provsumme = 0;
+    	try
+    	{
+	    	Statement stmt = connection.createStatement(); 
+	    	ResultSet rs = stmt.executeQuery("SELECT sum(provisionssumme) AS provisionssumme FROM bestand WHERE  strftime('%m',datetime(update_stamp,'unixepoch'))='"+Monat+"';"); 
+	        while (rs.next()) 
+	        {
+	        	provsumme = rs.getDouble("provisionssumme")
 	        }
     	}
     	catch (SQLException e) 
@@ -238,7 +258,7 @@ class DBController
         }
     	
     }
-    // Befülle IST-Zustand
+    // Befï¿½lle IST-Zustand
     
     public void insertistzustand(String taetigkeit, String sparte, Double anzahl_taetigkeiten, Double provisionsziel)
     {
