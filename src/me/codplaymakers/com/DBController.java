@@ -239,13 +239,15 @@ class DBController
             //Statement stmt = connection.createStatement();
             
     	PreparedStatement ps = connection 
-                .prepareStatement("INSERT INTO ziele VALUES (?, ?, ?, ?);"); 
+                .prepareStatement("INSERT INTO ziele VALUES (?, ?, ?, ?, ?);"); 
     	
+    	long create_stamp = System.currentTimeMillis()/1000;
 
          ps.setString(1, taetigkeit);
          ps.setString(2, sparte);
          ps.setDouble(3, anzahl_taetigkeiten);
-         ps.setDouble(4, provisionsziel);  
+         ps.setDouble(4, provisionsziel); 
+         ps.setDouble(5, create_stamp); 
          ps.addBatch();
          ps.executeBatch();
     	}
@@ -269,13 +271,15 @@ class DBController
             //Statement stmt = connection.createStatement();
             
     	PreparedStatement ps = connection 
-                .prepareStatement("INSERT INTO istzustand VALUES (?, ?, ?, ?);"); 
+                .prepareStatement("INSERT INTO istzustand VALUES (?, ?, ?, ?, ?);"); 
     	
+    	long create_stamp = System.currentTimeMillis()/1000;
 
          ps.setString(1, taetigkeit);
          ps.setString(2, sparte);
          ps.setDouble(3, anzahl_taetigkeiten);
          ps.setDouble(4, provisionsziel);  
+         ps.setLong(5, create_stamp);  
          ps.addBatch();
          ps.executeBatch();
     	}
@@ -329,8 +333,8 @@ class DBController
         try { 
             Statement stmt = connection.createStatement(); 
             stmt.executeUpdate("CREATE TABLE bestand (id, taetigkeit, sparte, praemie, netto_provison, crossselling, create_stamp, update_stamp);");
-            stmt.executeUpdate("CREATE TABLE ziele (taetigkeit, sparte, anzahl, provisionssumme);");
-            stmt.executeUpdate("CREATE TABLE istzustand (taetigkeit, sparte, anzahl, provisionssumme);");
+            stmt.executeUpdate("CREATE TABLE ziele (taetigkeit, sparte, anzahl, provisionssumme,create_stamp);");
+            stmt.executeUpdate("CREATE TABLE istzustand (taetigkeit, sparte, anzahl, provisionssumme,create_stamp);");
             connection.setAutoCommit(true); 
             connection.close(); 
             connection=null;
