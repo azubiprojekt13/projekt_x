@@ -81,7 +81,7 @@ class DBController
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT * FROM bestand WHERE  strftime('%m',datetime(update_stamp,'unixepoch'))= strftime('%m','now') AND taetigkeit = "+taetigkeit+" AND sparte ="+sparte+";"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT * FROM bestand WHERE strftime('%m',datetime(update_stamp,'unixepoch'))= strftime('%m','now') AND taetigkeit = '"+taetigkeit+"' AND sparte ='"+sparte+"';"); 
 	        while (rs.next()) 
 	        {
 	        	i++;
