@@ -370,7 +370,7 @@ public class Eingabe
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 
-				Balkendiagramm bd = new Balkendiagramm("Zielübersicht", 7.0 /*dbc.ausgabeDiagrammBestand(cbzftaetigkeit.getSelectedItem().toString(), cbzfsparte.getSelectedItem().toString())*/, dbc.ausgabeDiagrammZiele(cbzftaetigkeit.getSelectedItem().toString(), cbzfsparte.getSelectedItem().toString()));
+				Balkendiagramm bd = new Balkendiagramm("Zielübersicht", dbc.ausgabeDiagrammBestand(cbzftaetigkeit.getSelectedItem().toString(), cbzfsparte.getSelectedItem().toString()), dbc.ausgabeDiagrammZiele(cbzftaetigkeit.getSelectedItem().toString(), cbzfsparte.getSelectedItem().toString()));
 				bd.pack();
 				bd.setVisible(true);
 				
