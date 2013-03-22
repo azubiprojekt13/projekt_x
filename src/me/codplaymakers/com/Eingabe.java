@@ -366,6 +366,17 @@ public class Eingabe
 		cbzftaetigkeit.setBounds(152, 5, 154, 20);
 		tabzusammenfassung.add(cbzftaetigkeit);
 		
+		ziel2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+
+				Balkendiagramm bd = new Balkendiagramm("Zielübersicht", 7.0, dbc.ausgabeDiagrammZiele(cbzftaetigkeit.getSelectedItem().toString(), cbzfsparte.getSelectedItem().toString()));
+				bd.pack();
+				bd.setVisible(true);
+			}
+			
+		});
+		
 		tabbedPane.addTab("Zusammenfassung", tabzusammenfassung);
 	}
 	
