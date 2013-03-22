@@ -28,8 +28,8 @@ int anzahl;
 
 
 DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-dataset.addValue(wert1, "Ist", "Soll");
-dataset.addValue(wert2, "Ziel", "Soll");
+dataset.addValue(wert1, "Ist", "Ziel");
+dataset.addValue(wert2, "Soll", "Ziel");
 JFreeChart chart = ChartFactory.createBarChart(
 "Zielerfolg", // chart title
 "", // domain axis label
