@@ -20,6 +20,8 @@ import javax.swing.JFormattedTextField;
 import java.awt.Point;
 import java.awt.Color;
 import java.awt.SystemColor;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class Eingabe 
 	extends JFrame {
@@ -73,13 +75,6 @@ public class Eingabe
 				cbsparte.setBounds(152, 36, 154, 20);
 				tabeingabe.add(cbsparte);
 				
-
-				
-				
-				final JComboBox cbtaetigkeit = new JComboBox();
-				cbtaetigkeit.setModel(new DefaultComboBoxModel(new String[] {"Neuabschluss", "Vertragsverl\u00E4ngerung", "Servicetermin", "Storno"}));
-				cbtaetigkeit.setBounds(152, 5, 154, 20);
-				tabeingabe.add(cbtaetigkeit);
 				
 				//final csvErzeugen blubb = new csvErzeugen();
 				
@@ -103,6 +98,33 @@ public class Eingabe
 					    ftfprov.setBounds(152, 101, 154, 20);
 					    tabeingabe.add(ftfprov);
 					    
+						final JComboBox cbtaetigkeit = new JComboBox();
+						cbtaetigkeit.addItemListener(new ItemListener() {
+							public void itemStateChanged(ItemEvent arg0) {
+								
+								if(cbtaetigkeit.getSelectedItem()=="Anbahnung")
+								{
+									ftfpraemie.setVisible(false);
+									ftfprov.setVisible(false);
+									ftfpraemie.setValue(0.0);
+									ftfprov.setValue(0.0);
+								}
+								else if(cbtaetigkeit.getSelectedItem()!="Anbahnung")
+								{
+									ftfpraemie.setVisible(true);
+									ftfprov.setVisible(true);
+								}
+								else 
+								{
+									System.out.println("Nichts angewählt");
+								}
+								
+							}
+						});
+						cbtaetigkeit.setModel(new DefaultComboBoxModel(new String[] {"Abschluss", "Vertragsverl\u00E4ngerung", "Anbahnung", "Storno"}));
+						cbtaetigkeit.setBounds(152, 5, 154, 20);
+						tabeingabe.add(cbtaetigkeit);
+					    
 					    		JButton btneintragen = new JButton("Provision berechnen");
 					    		btneintragen.setBounds(10, 245, 172, 23);
 					    		tabeingabe.add(btneintragen);
@@ -123,56 +145,56 @@ public class Eingabe
 					    				double ergebnis, praemie;
 
 
-					    				if ((cbsparte.getSelectedItem()=="HRV") && (cbtaetigkeit.getSelectedItem()=="Neuabschluss"))
+					    				if ((cbsparte.getSelectedItem()=="HRV") && (cbtaetigkeit.getSelectedItem()=="Abschluss"))
 					    				{
 					    				praemie = Double.parseDouble(ftfpraemie.getText());
 					    				ergebnis = (praemie*0.2);
 					    				ftfprov.setText(String.valueOf(ergebnis));
 					    				}
 					    				
-					    				else if ((cbsparte.getSelectedItem()=="WGV") && (cbtaetigkeit.getSelectedItem()=="Neuabschluss")) 
+					    				else if ((cbsparte.getSelectedItem()=="WGV") && (cbtaetigkeit.getSelectedItem()=="Abschluss")) 
 					    				{
 					    				praemie = Double.parseDouble(ftfpraemie.getText());
 					    				ergebnis = (praemie*0.24);
 					    				ftfprov.setText(String.valueOf(ergebnis));
 					    				}
 					    				
-					    				else if ((cbsparte.getSelectedItem()=="GLS") && (cbtaetigkeit.getSelectedItem()=="Neuabschluss")) 
+					    				else if ((cbsparte.getSelectedItem()=="GLS") && (cbtaetigkeit.getSelectedItem()=="Abschluss")) 
 					    				{
 					    				praemie = Double.parseDouble(ftfpraemie.getText());
 					    				ergebnis = (praemie*0.18);
 					    				ftfprov.setText(String.valueOf(ergebnis));
 					    				}
 					    				
-					    				else if ((cbsparte.getSelectedItem()=="PHV") && (cbtaetigkeit.getSelectedItem()=="Neuabschluss"))
+					    				else if ((cbsparte.getSelectedItem()=="PHV") && (cbtaetigkeit.getSelectedItem()=="Abschluss"))
 					    				{
 					    				praemie = Double.parseDouble(ftfpraemie.getText());
 					    				ergebnis = (praemie*0.17);
 					    				ftfprov.setText(String.valueOf(ergebnis));
 					    				}
 					    				
-					    				else if ((cbsparte.getSelectedItem()=="UNF") && (cbtaetigkeit.getSelectedItem()=="Neuabschluss"))
+					    				else if ((cbsparte.getSelectedItem()=="UNF") && (cbtaetigkeit.getSelectedItem()=="Abschluss"))
 					    				{
 					    				praemie = Double.parseDouble(ftfpraemie.getText());
 					    				ergebnis = (praemie*0.21);
 					    				ftfprov.setText(String.valueOf(ergebnis));
 					    				}
 					    				
-					    				else if ((cbsparte.getSelectedItem()=="KRV") && (cbtaetigkeit.getSelectedItem()=="Neuabschluss")) 
+					    				else if ((cbsparte.getSelectedItem()=="KRV") && (cbtaetigkeit.getSelectedItem()=="Abschluss")) 
 					    				{
 					    				praemie = Double.parseDouble(ftfpraemie.getText());
 					    				ergebnis = (((praemie/12)*5)*0.3);
 					    				ftfprov.setText(String.valueOf(ergebnis));
 					    				}
 					    				
-					    				else if ((cbsparte.getSelectedItem()=="RSV") && (cbtaetigkeit.getSelectedItem()=="Neuabschluss"))
+					    				else if ((cbsparte.getSelectedItem()=="RSV") && (cbtaetigkeit.getSelectedItem()=="Abschluss"))
 					    				{
 					    				praemie = Double.parseDouble(ftfpraemie.getText());
 					    				ergebnis = ((praemie*0.5)*0.3);
 					    				ftfprov.setText(String.valueOf(ergebnis));
 					    				}
 					    				
-					    				else if((cbsparte.getSelectedItem()=="LV") && (cbtaetigkeit.getSelectedItem()=="Neuabschluss")) 
+					    				else if((cbsparte.getSelectedItem()=="LV") && (cbtaetigkeit.getSelectedItem()=="Abschluss")) 
 					    				{
 					    				praemie = Double.parseDouble(ftfpraemie.getText());
 					    				ergebnis = (praemie/0.0275*0.3);
@@ -227,13 +249,16 @@ public class Eingabe
 			    						ftfprov.setText(String.valueOf(ergebnis));
 			    						}
 					    				
-			    						else 
+			    						else if((cbsparte.getSelectedItem()=="LV") && (cbtaetigkeit.getSelectedItem()=="Storno"))
 			    						{
 			    						praemie = Double.parseDouble(ftfpraemie.getText());
 			    						ergebnis = (praemie/0.0275*(-0.3));
 			    						ftfprov.setText(String.valueOf(ergebnis));
 			    						}
-
+					    				
+			    						else {
+			    							System.out.println("Keine Sparte ausgewählt");
+			    						}
 					    				
 					    			}
 					    				
@@ -362,7 +387,7 @@ public class Eingabe
 		tabzusammenfassung.add(cbzfsparte);
 		
 		final JComboBox cbzftaetigkeit = new JComboBox();
-		cbzftaetigkeit.setModel(new DefaultComboBoxModel(new String[] {"Neuabschluss", "Vertragsverl\u00E4ngerung", "Servicetermin", "Storno"}));
+		cbzftaetigkeit.setModel(new DefaultComboBoxModel(new String[] {"Abschluss", "Vertragsverl\u00E4ngerung", "Anbahnung", "Storno"}));
 		cbzftaetigkeit.setBounds(152, 5, 154, 20);
 		tabzusammenfassung.add(cbzftaetigkeit);
 		
@@ -421,7 +446,7 @@ public class Eingabe
 		
 		
 		final JComboBox cbztaetigkeit = new JComboBox();
-		cbztaetigkeit.setModel(new DefaultComboBoxModel(new String[] {"Neuabschluss", "Vertragsverl\u00E4ngerung", "Servicetermin", "Storno"}));
+		cbztaetigkeit.setModel(new DefaultComboBoxModel(new String[] {"Abschluss", "Vertragsverl\u00E4ngerung", "Anbahnung", "Storno"}));
 		cbztaetigkeit.setBounds(118, 11, 143, 20);
 		tabziele.add(cbztaetigkeit);
 		
