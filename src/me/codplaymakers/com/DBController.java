@@ -141,10 +141,10 @@ class DBController
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT sum(provisionssumme) AS provisionssumme FROM bestand WHERE strftime('%m',datetime(update_stamp,'unixepoch')) = strftime('%m','now');"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT sum(netto_provison) AS provisionssummenwurst FROM bestand WHERE strftime('%m',datetime(update_stamp,'unixepoch')) = strftime('%m','now');"); 
 	        while (rs.next()) 
 	        {
-	        	provsumme = rs.getDouble("provisionssumme");
+	        	provsumme = rs.getDouble("provisionssummenwurst");
 	        }
     	}
     	catch (SQLException e) 

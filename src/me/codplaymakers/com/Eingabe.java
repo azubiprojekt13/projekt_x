@@ -377,6 +377,15 @@ public class Eingabe
 		tabzusammenfassung.add(ziel2);
 		
 		JButton ziel3 = new JButton("Provisionsziel");
+		ziel3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				Balkendiagramm bd_2 = new Balkendiagramm("Aktuelle Provision", dbc.ausgabeDiagrammProvSumme(), dbc.ausgabeDiagrammProv());
+				bd_2.pack();
+				bd_2.setVisible(true);				
+			}
+		});
 		ziel3.setBounds(10, 157, 185, 23);
 		tabzusammenfassung.add(ziel3);
 		
