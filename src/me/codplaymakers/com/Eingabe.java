@@ -126,7 +126,7 @@ public class Eingabe
 					    				if ((cbsparte.getSelectedItem()=="HRV") && (cbtaetigkeit.getSelectedItem()=="Neuabschluss"))
 					    				{
 					    				praemie = Double.parseDouble(ftfpraemie.getText());
-					    				ergebnis = (praemie*0.3);
+					    				ergebnis = (praemie*0.2);
 					    				ftfprov.setText(String.valueOf(ergebnis));
 					    				}
 					    				
