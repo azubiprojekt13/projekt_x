@@ -441,11 +441,12 @@ public class Eingabe
 		txtpnzsparte.setBounds(9, 42, 77, 20);
 		tabziele.add(txtpnzsparte);
 		
-		JTextPane txtpnprovision = new JTextPane();
+		final JTextPane txtpnprovision = new JTextPane();
 		txtpnprovision.setBackground(SystemColor.menu);
 		txtpnprovision.setEditable(false);
 		txtpnprovision.setText("Provision");
 		txtpnprovision.setBounds(10, 104, 76, 20);
+		txtpnprovision.setVisible(false);
 		tabziele.add(txtpnprovision);
 		
 		final JSpinner sanzahl = new JSpinner();
@@ -455,9 +456,31 @@ public class Eingabe
 		JButton zablegen = new JButton("Ablegen");
 		zablegen.setBounds(10, 245, 154, 23);
 		
+	    final JFormattedTextField ftfprovision = new JFormattedTextField();
+	    ftfprovision.setBounds(118, 104, 143, 20);
+	    ftfprovision.setVisible(false);
+	    ftfprovision.setValue(0.0);
+	    tabziele.add(ftfprovision);
+		
 		
 		final JComboBox cbztaetigkeit = new JComboBox();
-		cbztaetigkeit.setModel(new DefaultComboBoxModel(new String[] {"Abschluss", "Vertragsverl\u00E4ngerung", "Anbahnung", "Storno"}));
+		cbztaetigkeit.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				
+				if(cbztaetigkeit.getSelectedItem()=="Wunschprovision")
+				{
+					txtpnprovision.setVisible(true);
+					ftfprovision.setVisible(true);
+				}
+				else
+				{
+					txtpnprovision.setVisible(false);
+					ftfprovision.setVisible(false);
+				}
+				
+			}
+		});
+		cbztaetigkeit.setModel(new DefaultComboBoxModel(new String[] {"Abschluss", "Vertragsverl\u00E4ngerung", "Anbahnung", "Storno", "Wunschprovision"}));
 		cbztaetigkeit.setBounds(118, 11, 143, 20);
 		tabziele.add(cbztaetigkeit);
 		
@@ -466,10 +489,6 @@ public class Eingabe
 		cbzsparte.setSelectedItem(" ");
 		cbzsparte.setBounds(118, 42, 143, 20);
 		tabziele.add(cbzsparte);
-		
-	    final JFormattedTextField ftfprovision = new JFormattedTextField();
-	    ftfprovision.setBounds(118, 104, 143, 20);
-	    tabziele.add(ftfprovision);
 	    
 		final JCheckBox cbSollIst = new JCheckBox();
 		cbSollIst.setBounds(10, 163, 143, 20);
