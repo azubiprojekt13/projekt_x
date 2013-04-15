@@ -130,10 +130,11 @@ public class Eingabe
 					    		tabeingabe.add(btneintragen);
 					    		
 					    		JTextPane txtpnAblauf = new JTextPane();
+					    		txtpnAblauf.setEditable(false);
 					    		txtpnAblauf.setBackground(SystemColor.menu);
 					    		txtpnAblauf.setSelectedTextColor(SystemColor.menu);
 					    		txtpnAblauf.setText("Ablaufdatum");
-					    		txtpnAblauf.setBounds(10, 163, 66, 20);
+					    		txtpnAblauf.setBounds(10, 163, 88, 20);
 					    		tabeingabe.add(txtpnAblauf);
 					    		
 
@@ -285,6 +286,7 @@ public class Eingabe
 					    				tabeingabe.add(formattedTextField_1);
 					    				
 					    				JTextPane txtpnBeginnDarum = new JTextPane();
+					    				txtpnBeginnDarum.setEditable(false);
 					    				txtpnBeginnDarum.setBackground(SystemColor.menu);
 					    				txtpnBeginnDarum.setSelectedTextColor(SystemColor.menu);
 					    				txtpnBeginnDarum.setText("Beginn Datum");
