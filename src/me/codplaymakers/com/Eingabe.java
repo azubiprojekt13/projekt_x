@@ -347,7 +347,7 @@ public class Eingabe
 		tabzusammenfassung.add(txtpnstornoquote);
 		
 		JTextPane txtpndiagramme = new JTextPane();
-		txtpndiagramme.setBounds(10, 92, 81, 20);
+		txtpndiagramme.setBounds(10, 67, 81, 20);
 		txtpndiagramme.setBackground(SystemColor.menu);
 		txtpndiagramme.setText("Diagramme:");
 		tabzusammenfassung.add(txtpndiagramme);
@@ -379,7 +379,7 @@ public class Eingabe
 		
 		
 		JButton ziel3 = new JButton("Provisionsziel");
-		ziel3.setBounds(10, 174, 185, 23);
+		ziel3.setBounds(10, 189, 185, 23);
 		ziel3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -403,7 +403,7 @@ public class Eingabe
 		tabzusammenfassung.add(cbzftaetigkeit);
 		
 		JButton ziel4 = new JButton("KFZ pro Monat");
-		ziel4.setBounds(10, 123, 100, 20);
+		ziel4.setBounds(10, 98, 132, 20);
 		ziel4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -417,7 +417,7 @@ public class Eingabe
 		tabzusammenfassung.add(ziel4);
 		
 		JButton ziel2 = new JButton("SHU pro Monat");
-		ziel2.setBounds(110, 123, 100, 20);
+		ziel2.setBounds(10, 129, 132, 20);
 		ziel2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -442,8 +442,31 @@ public class Eingabe
 				
 			}
 		});
-		ziel5.setBounds(220, 123, 119, 20);
+		ziel5.setBounds(10, 160, 132, 20);
 		tabzusammenfassung.add(ziel5);
+		
+		JButton ziel7 = new JButton("KFZ pro Jahr");
+		ziel7.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				//Balkendiagramm lebenjahr = new Balkendiagramm("Uebersicht Leben/Jahr", dbc.ausg, wert2)
+				
+			}
+		});
+		ziel7.setBounds(196, 98, 143, 20);
+		
+		tabzusammenfassung.add(ziel7);
+		
+		JButton ziel8 = new JButton("Leben pro Jahr");
+		ziel8.setBounds(196, 160, 143, 20);
+		
+		tabzusammenfassung.add(ziel8);
+		
+		JButton ziel9 = new JButton("SHU pro Jahr");
+		ziel9.setBounds(196, 129, 143, 20);
+		
+		tabzusammenfassung.add(ziel9);
 		
 		tabbedPane.addTab("Zusammenfassung", tabzusammenfassung);
 	}
