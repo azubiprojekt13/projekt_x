@@ -141,7 +141,7 @@ class DBController
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM ziele where taetigkeit = '"+taetigkeit+"' AND sparte ='HRV' OR sparte ='WGV' OR sparte ='GLS' OR sparte ='UNF' AND create_stamp = (select max(create_stamp) from ziele);"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM ziele where taetigkeit = '"+taetigkeit+"' AND sparte ='SHU' AND create_stamp = (select max(create_stamp) from ziele where sparte ='SHU');"); 
 	        while (rs.next()) 
 	        {
 	        	anzahl=rs.getInt("anzahl");
@@ -161,7 +161,7 @@ class DBController
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM ziele where taetigkeit = '"+taetigkeit+"' AND sparte ='Leben' AND create_stamp = (select max(create_stamp) from ziele);"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM ziele where taetigkeit = '"+taetigkeit+"' AND sparte ='Leben' AND create_stamp = (select max(create_stamp) from ziele where sparte ='Leben');"); 
 	        while (rs.next()) 
 	        {
 	        	anzahl=rs.getInt("anzahl");
@@ -181,7 +181,7 @@ class DBController
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM ziele where taetigkeit = '"+taetigkeit+"' AND sparte ='KFZ' AND create_stamp = (select max(create_stamp) from ziele AND sparte ='KFZ');"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM ziele where taetigkeit = '"+taetigkeit+"' AND sparte ='KFZ' AND create_stamp = (select max(create_stamp) from ziele where sparte ='KFZ');"); 
 	        while (rs.next()) 
 	        {
 	        	anzahl=rs.getInt("anzahl");
@@ -495,7 +495,7 @@ class DBController
     }
     
     // Insert Zielsetzung
-    public void insertZielsetzungen(String taetigkeit, String sparte, int anzahl_taetigkeiten, int provisionsziel)
+    public void insertZielsetzungen(String taetigkeit, String sparte, int anzahl_taetigkeiten, double provisionsziel)
     {
     	java.sql.Timestamp  sqlDate = new java.sql.Timestamp(new java.util.Date().getTime());
     	
@@ -511,7 +511,7 @@ class DBController
          ps.setString(1, taetigkeit);
          ps.setString(2, sparte);
          ps.setInt(3, anzahl_taetigkeiten);
-         ps.setInt(4, provisionsziel); 
+         ps.setDouble(4, provisionsziel); 
          ps.setDouble(5, create_stamp); 
          ps.addBatch();
          ps.executeBatch();
