@@ -317,6 +317,8 @@ class DBController
     	return i;
     }
     
+    //TEST
+    
     
     public double ausgabeDiagrammProv()
     {
