@@ -297,6 +297,36 @@ class DBController
     	return LEBENprojahr;
     }
     
+    public double ausgabeStornoquote()
+    {
+    	double quote = 0.0;
+    	double i = 0.0;
+    	double y = 0.0;
+    	try
+    	{
+	    	Statement stmt = connection.createStatement(); 
+	    	ResultSet rs = stmt.executeQuery("SELECT * FROM Ziele WHERE taetigkeit = 'Storno' ;"); 
+	        while (rs.next()) 
+	        {
+	        	i++;
+	        }
+	        Statement stmn = connection.createStatement(); 
+	    	ResultSet rc = stmt.executeQuery("SELECT * FROM Ziele WHERE taetigkeit != 'Storno' ;"); 
+	        while (rs.next()) 
+	        {
+	        	y++;
+	        }
+    	}
+    	catch (SQLException e) 
+        { 
+            System.err.println("Couldn't handle DB-Query"); 
+            e.printStackTrace(); 
+        }
+    	;
+    	quote = i/y;
+    	return quote;
+    }
+    
     public double ausgabeDiagrammBestandLEBENproJahr(String taetigkeit)
     {
     	double i = 0.0;
