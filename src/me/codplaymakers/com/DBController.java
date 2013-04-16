@@ -141,7 +141,7 @@ class DBController
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM ziele where taetigkeit = '"+taetigkeit+"' AND sparte ='HRV' OR sparte ='WGV' OR sparte ='GLS' OR sparte ='UNF';"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM ziele where taetigkeit = '"+taetigkeit+"' AND sparte ='HRV' OR sparte ='WGV' OR sparte ='GLS' OR sparte ='UNF' AND create_stamp = (select max(create_stamp) from ziele);"); 
 	        while (rs.next()) 
 	        {
 	        	anzahl=rs.getDouble("anzahl");
@@ -161,7 +161,7 @@ class DBController
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM ziele where taetigkeit = '"+taetigkeit+"' AND sparte ='L';"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM ziele where taetigkeit = '"+taetigkeit+"' AND sparte ='L' AND create_stamp = (select max(create_stamp) from ziele);"); 
 	        while (rs.next()) 
 	        {
 	        	anzahl=rs.getDouble("anzahl");
@@ -181,7 +181,7 @@ class DBController
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM ziele where taetigkeit = '"+taetigkeit+"' AND sparte ='KFZ';"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM ziele where taetigkeit = '"+taetigkeit+"' AND sparte ='KFZ' AND create_stamp = (select max(create_stamp) from ziele);"); 
 	        while (rs.next()) 
 	        {
 	        	anzahl=rs.getDouble("anzahl");
@@ -193,6 +193,68 @@ class DBController
             e.printStackTrace(); 
         }
     	return anzahl;
+    }
+    
+    public double ausgabeDiagrammZieleKFZproJahr(String taetigkeit)
+    {
+    	double KFZprojahr = 0;
+    	try
+    	{
+	    	Statement stmt = connection.createStatement(); 
+	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM Ziele WHERE AND sparte ='KFZ' and create_stamp = (select max(create_stamp) from ziele);"); 
+	        while (rs.next()) 
+	        {
+	        	KFZprojahr = rs.getDouble("anzahl");
+	        }
+    	}
+    	catch (SQLException e) 
+        { 
+            System.err.println("Couldn't handle DB-Query"); 
+            e.printStackTrace(); 
+        }
+    	KFZprojahr=KFZprojahr*12;
+    	return KFZprojahr;
+    }
+    public double ausgabeDiagrammZieleSHUproJahr(String taetigkeit)
+    {
+    	double SHUprojahr = 0;
+    	try
+    	{
+	    	Statement stmt = connection.createStatement(); 
+	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM Ziele WHERE AND sparte ='SHU' and create_stamp = (select max(create_stamp) from ziele);"); 
+	        while (rs.next()) 
+	        {
+	        	SHUprojahr = rs.getDouble("anzahl");
+	        }
+    	}
+    	catch (SQLException e) 
+        { 
+            System.err.println("Couldn't handle DB-Query"); 
+            e.printStackTrace(); 
+        }
+    	SHUprojahr=SHUprojahr*12;
+    	return SHUprojahr;
+    }
+    
+    public double ausgabeDiagrammZieleLEBENproJahr(String taetigkeit)
+    {
+    	double LEBENprojahr = 0;
+    	try
+    	{
+	    	Statement stmt = connection.createStatement(); 
+	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM Ziele WHERE AND sparte ='L' and create_stamp = (select max(create_stamp) from ziele);"); 
+	        while (rs.next()) 
+	        {
+	        	LEBENprojahr = rs.getDouble("anzahl");
+	        }
+    	}
+    	catch (SQLException e) 
+        { 
+            System.err.println("Couldn't handle DB-Query"); 
+            e.printStackTrace(); 
+        }
+    	LEBENprojahr=LEBENprojahr*12;
+    	return LEBENprojahr;
     }
     
     public double ausgabeDiagrammProv()
