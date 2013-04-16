@@ -75,13 +75,51 @@ class DBController
         } 
     }
     
-    public int ausgabeDiagrammBestand(String taetigkeit, String sparte)
+    public int ausgabeDiagrammBestandSHU(String taetigkeit)
     {
     	int i = 0;
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT * FROM bestand WHERE strftime('%m',datetime(update_stamp,'unixepoch'))= strftime('%m','now') AND taetigkeit = '"+taetigkeit+"' AND sparte ='"+sparte+"';"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT * FROM bestand WHERE strftime('%m',datetime(update_stamp,'unixepoch'))= strftime('%m','now') AND taetigkeit = '"+taetigkeit+"' AND sparte ='HRV' OR sparte ='WGV' OR sparte ='GLS' OR sparte ='UNF';"); 
+	        while (rs.next()) 
+	        {
+	        	i++;
+	        }
+    	}
+    	catch (SQLException e) 
+        { 
+            System.err.println("Couldn't handle DB-Query"); 
+            e.printStackTrace(); 
+        }
+    	return i;
+    }
+    public int ausgabeDiagrammBestandL(String taetigkeit)
+    {
+    	int i = 0;
+    	try
+    	{
+	    	Statement stmt = connection.createStatement(); 
+	    	ResultSet rs = stmt.executeQuery("SELECT * FROM bestand WHERE strftime('%m',datetime(update_stamp,'unixepoch'))= strftime('%m','now') AND taetigkeit = '"+taetigkeit+"' AND sparte ='L';"); 
+	        while (rs.next()) 
+	        {
+	        	i++;
+	        }
+    	}
+    	catch (SQLException e) 
+        { 
+            System.err.println("Couldn't handle DB-Query"); 
+            e.printStackTrace(); 
+        }
+    	return i;
+    }
+    public int ausgabeDiagrammBestandKFZ(String taetigkeit)
+    {
+    	int i = 0;
+    	try
+    	{
+	    	Statement stmt = connection.createStatement(); 
+	    	ResultSet rs = stmt.executeQuery("SELECT * FROM bestand WHERE strftime('%m',datetime(update_stamp,'unixepoch'))= strftime('%m','now') AND taetigkeit = '"+taetigkeit+"' AND sparte ='KFZ';"); 
 	        while (rs.next()) 
 	        {
 	        	i++;
@@ -95,13 +133,55 @@ class DBController
     	return i;
     }
     
-    public double ausgabeDiagrammZiele(String taetigkeit, String sparte)
+    
+    
+    public double ausgabeDiagrammZieleSHU(String taetigkeit, String sparte)
     {
     	double anzahl = 0.0;
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM ziele where taetigkeit = '"+taetigkeit+"' and sparte = '"+sparte+"';"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM ziele where taetigkeit = '"+taetigkeit+"' AND sparte ='HRV' OR sparte ='WGV' OR sparte ='GLS' OR sparte ='UNF';"); 
+	        while (rs.next()) 
+	        {
+	        	anzahl=rs.getDouble("anzahl");
+	        }
+    	}
+    	catch (SQLException e) 
+        { 
+            System.err.println("Couldn't handle DB-Query"); 
+            e.printStackTrace(); 
+        }
+    	return anzahl;
+    }
+    
+    public double ausgabeDiagrammZieleL(String taetigkeit, String sparte)
+    {
+    	double anzahl = 0.0;
+    	try
+    	{
+	    	Statement stmt = connection.createStatement(); 
+	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM ziele where taetigkeit = '"+taetigkeit+"' AND sparte ='L';"); 
+	        while (rs.next()) 
+	        {
+	        	anzahl=rs.getDouble("anzahl");
+	        }
+    	}
+    	catch (SQLException e) 
+        { 
+            System.err.println("Couldn't handle DB-Query"); 
+            e.printStackTrace(); 
+        }
+    	return anzahl;
+    }
+    
+    public double ausgabeDiagrammZieleKFZ(String taetigkeit, String sparte)
+    {
+    	double anzahl = 0.0;
+    	try
+    	{
+	    	Statement stmt = connection.createStatement(); 
+	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM ziele where taetigkeit = '"+taetigkeit+"' AND sparte ='KFZ';"); 
 	        while (rs.next()) 
 	        {
 	        	anzahl=rs.getDouble("anzahl");
@@ -121,7 +201,7 @@ class DBController
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT provisionssumme FROM ziele where provisionssumme IS NOT NULL"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT provisionssumme FROM ziele where provisionssumme IS NOT NULL AND create_stamp = max(create_stamp) "); 
 	        while (rs.next()) 
 	        {
 	        	provsumme = rs.getDouble("provisionssumme");
