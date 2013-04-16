@@ -335,35 +335,35 @@ public class Eingabe
 		tabzusammenfassung.setLayout(null);
 		
 		JTextPane txtpnabschlussquote = new JTextPane();
+		txtpnabschlussquote.setBounds(10, 223, 132, 20);
 		txtpnabschlussquote.setBackground(SystemColor.menu);
 		txtpnabschlussquote.setText("Abschlussquote");
-		txtpnabschlussquote.setBounds(10, 223, 132, 20);
 		tabzusammenfassung.add(txtpnabschlussquote);
 		
 		JTextPane txtpnstornoquote = new JTextPane();
+		txtpnstornoquote.setBounds(10, 248, 120, 20);
 		txtpnstornoquote.setBackground(SystemColor.menu);
 		txtpnstornoquote.setText("Stornoquote");
-		txtpnstornoquote.setBounds(10, 248, 120, 20);
 		tabzusammenfassung.add(txtpnstornoquote);
 		
 		JTextPane txtpndiagramme = new JTextPane();
+		txtpndiagramme.setBounds(10, 92, 81, 20);
 		txtpndiagramme.setBackground(SystemColor.menu);
 		txtpndiagramme.setText("Diagramme:");
-		txtpndiagramme.setBounds(10, 92, 81, 20);
 		tabzusammenfassung.add(txtpndiagramme);
 		
 		JTextPane txtpnzfSparte = new JTextPane();
+		txtpnzfSparte.setBounds(10, 36, 66, 20);
 		txtpnzfSparte.setBackground(SystemColor.menu);
 		txtpnzfSparte.setEditable(false);
 		txtpnzfSparte.setText("Sparte");
-		txtpnzfSparte.setBounds(10, 36, 66, 20);
 		tabzusammenfassung.add(txtpnzfSparte);
 		
 		JTextPane txtpnzfVertrag = new JTextPane();
+		txtpnzfVertrag.setBounds(10, 5, 132, 20);
 		txtpnzfVertrag.setBackground(SystemColor.menu);
 		txtpnzfVertrag.setEditable(false);
 		txtpnzfVertrag.setText("Tätigkeit");
-		txtpnzfVertrag.setBounds(10, 5, 132, 20);
 		tabzusammenfassung.add(txtpnzfVertrag);
 		
 	    final JFormattedTextField ftfaquote = new JFormattedTextField();
@@ -374,11 +374,12 @@ public class Eingabe
 	    ftfsquote.setBounds(152, 248, 154, 20);
 	    tabzusammenfassung.add(ftfsquote);
 		
-		JButton ziel2 = new JButton("pro Monat");
-		ziel2.setBounds(10, 123, 185, 23);
-		tabzusammenfassung.add(ziel2);
+		//ziel4.setBounds(10, 123, 100, 20);
+		//tabzusammenfassung.add(ziel4);
+		
 		
 		JButton ziel3 = new JButton("Provisionsziel");
+		ziel3.setBounds(10, 174, 185, 23);
 		ziel3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -388,32 +389,61 @@ public class Eingabe
 				bd_2.setVisible(true);				
 			}
 		});
-		ziel3.setBounds(10, 157, 185, 23);
 		tabzusammenfassung.add(ziel3);
 		
 		final JComboBox cbzfsparte = new JComboBox();
+		cbzfsparte.setBounds(152, 36, 154, 20);
 		cbzfsparte.setModel(new DefaultComboBoxModel(new String[] {"SHU", "L", "K", "   "}));
 		cbzfsparte.setSelectedItem(" ");
-		cbzfsparte.setBounds(152, 36, 154, 20);
 		tabzusammenfassung.add(cbzfsparte);
 		
 		final JComboBox cbzftaetigkeit = new JComboBox();
-		cbzftaetigkeit.setModel(new DefaultComboBoxModel(new String[] {"Abschluss", "Vertragsverl\u00E4ngerung", "Anbahnung", "Storno"}));
 		cbzftaetigkeit.setBounds(152, 5, 154, 20);
+		cbzftaetigkeit.setModel(new DefaultComboBoxModel(new String[] {"Abschluss", "Vertragsverl\u00E4ngerung", "Anbahnung", "Storno"}));
 		tabzusammenfassung.add(cbzftaetigkeit);
 		
+		JButton ziel4 = new JButton("KFZ pro Monat");
+		ziel4.setBounds(10, 123, 100, 20);
+		ziel4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				Balkendiagramm kfz_bd = new Balkendiagramm("Uebersicht KFZ", dbc.ausgabeDiagrammBestandKFZ(cbzftaetigkeit.getSelectedItem().toString()), dbc.ausgabeDiagrammZieleKFZ(cbzftaetigkeit.getSelectedItem().toString()));
+				kfz_bd.pack();
+				kfz_bd.setVisible(true);
+			}
+		});
+		
+		tabzusammenfassung.add(ziel4);
+		
+		JButton ziel2 = new JButton("SHU pro Monat");
+		ziel2.setBounds(110, 123, 100, 20);
 		ziel2.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
-
-				Balkendiagramm bd = new Balkendiagramm("Zielübersicht", dbc.ausgabeDiagrammBestand(cbzftaetigkeit.getSelectedItem().toString(), cbzfsparte.getSelectedItem().toString()), dbc.ausgabeDiagrammZiele(cbzftaetigkeit.getSelectedItem().toString(), cbzfsparte.getSelectedItem().toString()));
-				bd.pack();
-				bd.setVisible(true);
+			public void mouseClicked(MouseEvent e) {
 				
+				Balkendiagramm shu_bd = new Balkendiagramm("Uebersicht SHU", dbc.ausgabeDiagrammBestandSHU(cbzftaetigkeit.getSelectedItem().toString()), dbc.ausgabeDiagrammZieleSHU(cbzftaetigkeit.getSelectedItem().toString()));
+				shu_bd.pack();
+				shu_bd.setVisible(true);
 				
 			}
-			
 		});
+		
+		tabzusammenfassung.add(ziel2);
+		
+		JButton ziel5 = new JButton("Leben pro Monat");
+		ziel5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				Balkendiagramm leben_bd = new Balkendiagramm("Uebersicht Leben", dbc.ausgabeDiagrammBestandL(cbzftaetigkeit.getSelectedItem().toString()), dbc.ausgabeDiagrammZieleL(cbzftaetigkeit.getSelectedItem().toString()));
+				leben_bd.pack();
+				leben_bd.setVisible(true);
+				
+			}
+		});
+		ziel5.setBounds(220, 123, 119, 20);
+		tabzusammenfassung.add(ziel5);
 		
 		tabbedPane.addTab("Zusammenfassung", tabzusammenfassung);
 	}

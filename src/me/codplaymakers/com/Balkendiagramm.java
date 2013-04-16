@@ -9,11 +9,15 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JDialog;
 
 /**
 * A simple demonstration application showing how to create a bar chart.
 */
-public class Balkendiagramm extends ApplicationFrame {
+public class Balkendiagramm extends JDialog {
 /**
 * Creates a new demo instance.
 *
@@ -21,7 +25,8 @@ public class Balkendiagramm extends ApplicationFrame {
 */
 public Balkendiagramm(String title, double wert1, double wert2) {
 	
-super(title);
+super();
+
 
 int anzahl;
 
@@ -43,6 +48,7 @@ false // URLs
 ChartPanel chartPanel = new ChartPanel(chart, false);
 //chartPanel.setPreferredSize(new Dimension(500, 270));
 chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+
 setContentPane(chartPanel);
 
 }
