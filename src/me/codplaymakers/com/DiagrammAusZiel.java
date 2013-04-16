@@ -15,7 +15,7 @@ public class DiagrammAusZiel {
         dia1.pack();
         dia1.setVisible(true);*/
 		KreisDiagramm dia2 = new KreisDiagramm("Provionsuebersicht", "Provision");
-		dia2.AddValue("Provisionsstand", dbc.
+		dia2.AddValue("Provisionsstand", dbc.ausgabeDiagrammProvSumme());
 		dia2.AddValue("Wunschprovision",dbc.ausgabeDiagrammProv());
 		
 	}
