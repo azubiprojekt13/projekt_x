@@ -40,7 +40,7 @@ public class KreisDiagramm extends JFrame {
      */
 
         
-    public void AddValue(String Was,Double Wert){
+    public void AddValue(String Was,Integer Wert){
     	dataset1.setValue(Was, Wert);
     	dataset2=dataset1;
     }

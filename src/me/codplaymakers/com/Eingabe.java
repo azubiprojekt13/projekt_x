@@ -556,8 +556,8 @@ public class Eingabe
 				
 				 String taetigkeit = cbztaetigkeit.getSelectedItem().toString();
 				 String sparte = cbzsparte.getSelectedItem().toString();
-				 Double anzahl_taetigkeiten = Double.valueOf(sanzahl.getValue().toString());
-				 Double provisionsziel = Double.valueOf(ftfprovision.getText());
+				 Integer anzahl_taetigkeiten = Integer.valueOf(sanzahl.getValue().toString());
+				 Integer provisionsziel = Integer.valueOf(ftfprovision.getText());
 				
 		if (cbSollIst.isSelected()){
 			dbc.insertZielsetzungen(taetigkeit, sparte, anzahl_taetigkeiten, provisionsziel);

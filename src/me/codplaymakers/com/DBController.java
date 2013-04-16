@@ -135,16 +135,16 @@ class DBController
     
     
     
-    public double ausgabeDiagrammZieleSHU(String taetigkeit)
+    public int ausgabeDiagrammZieleSHU(String taetigkeit)
     {
-    	double anzahl = 0.0;
+    	int anzahl = 0;
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
 	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM ziele where taetigkeit = '"+taetigkeit+"' AND sparte ='HRV' OR sparte ='WGV' OR sparte ='GLS' OR sparte ='UNF' AND create_stamp = (select max(create_stamp) from ziele);"); 
 	        while (rs.next()) 
 	        {
-	        	anzahl=rs.getDouble("anzahl");
+	        	anzahl=rs.getInt("anzahl");
 	        }
     	}
     	catch (SQLException e) 
@@ -155,16 +155,16 @@ class DBController
     	return anzahl;
     }
     
-    public double ausgabeDiagrammZieleL(String taetigkeit)
+    public int ausgabeDiagrammZieleL(String taetigkeit)
     {
-    	double anzahl = 0.0;
+    	int anzahl = 0;
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
 	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM ziele where taetigkeit = '"+taetigkeit+"' AND sparte ='L' AND create_stamp = (select max(create_stamp) from ziele);"); 
 	        while (rs.next()) 
 	        {
-	        	anzahl=rs.getDouble("anzahl");
+	        	anzahl=rs.getInt("anzahl");
 	        }
     	}
     	catch (SQLException e) 
@@ -175,16 +175,16 @@ class DBController
     	return anzahl;
     }
     
-    public double ausgabeDiagrammZieleKFZ(String taetigkeit)
+    public int ausgabeDiagrammZieleKFZ(String taetigkeit)
     {
-    	double anzahl = 0.0;
+    	int anzahl = 0;
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
 	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM ziele where taetigkeit = '"+taetigkeit+"' AND sparte ='KFZ' AND create_stamp = (select max(create_stamp) from ziele);"); 
 	        while (rs.next()) 
 	        {
-	        	anzahl=rs.getDouble("anzahl");
+	        	anzahl=rs.getInt("anzahl");
 	        }
     	}
     	catch (SQLException e) 
@@ -195,9 +195,9 @@ class DBController
     	return anzahl;
     }
     
-    public double ausgabeDiagrammBestandKFZproJahr(String taetigkeit)
+    public int ausgabeDiagrammBestandKFZproJahr(String taetigkeit)
     {
-    	double i = 0.0;
+    	int i = 0;
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
@@ -215,16 +215,16 @@ class DBController
     	return i;
     }
     
-    public double ausgabeDiagrammZieleKFZproJahr(String taetigkeit)
+    public int ausgabeDiagrammZieleKFZproJahr(String taetigkeit)
     {
-    	double KFZprojahr = 0;
+    	int KFZprojahr = 0;
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM Ziele WHERE taetigkeit = '"+taetigkeit+"' AND sparte ='KFZ' and create_stamp = (select max(create_stamp) from ziele);"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM Ziele WHERE taetigkeit = '"+taetigkeit+"' AND sparte ='KFZ' and create_stamp = (select max(create_stamp) from ziele where sparte ='KFZ');"); 
 	        while (rs.next()) 
 	        {
-	        	KFZprojahr = rs.getDouble("anzahl");
+	        	KFZprojahr = rs.getInt("anzahl");
 	        }
     	}
     	catch (SQLException e) 
@@ -235,16 +235,16 @@ class DBController
     	KFZprojahr=KFZprojahr*12;
     	return KFZprojahr;
     }
-    public double ausgabeDiagrammZieleSHUproJahr(String taetigkeit)
+    public int ausgabeDiagrammZieleSHUproJahr(String taetigkeit)
     {
-    	double SHUprojahr = 0;
+    	int SHUprojahr = 0;
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM Ziele WHERE taetigkeit = '"+taetigkeit+"' AND sparte ='SHU' and create_stamp = (select max(create_stamp) from ziele);"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM Ziele WHERE taetigkeit = '"+taetigkeit+"' AND sparte ='SHU' and create_stamp = (select max(create_stamp) from ziele where sparte ='SHU');"); 
 	        while (rs.next()) 
 	        {
-	        	SHUprojahr = rs.getDouble("anzahl");
+	        	SHUprojahr = rs.getInt("anzahl");
 	        }
     	}
     	catch (SQLException e) 
@@ -256,9 +256,9 @@ class DBController
     	return SHUprojahr;
     }
     
-    public double ausgabeDiagrammBestandSHUproJahr(String taetigkeit)
+    public int ausgabeDiagrammBestandSHUproJahr(String taetigkeit)
     {
-    	double i = 0.0;
+    	int i = 0;
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
@@ -276,16 +276,16 @@ class DBController
     	return i;
     }
     
-    public double ausgabeDiagrammZieleLEBENproJahr(String taetigkeit)
+    public int ausgabeDiagrammZieleLEBENproJahr(String taetigkeit)
     {
-    	double LEBENprojahr = 0;
+    	int LEBENprojahr = 0;
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM Ziele WHERE taetigkeit = '"+taetigkeit+"' AND sparte ='Leben' and create_stamp = (select max(create_stamp) from ziele);"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM Ziele WHERE taetigkeit = '"+taetigkeit+"' AND sparte ='Leben' and create_stamp = (select max(create_stamp) from ziele where sparte ='Leben');"); 
 	        while (rs.next()) 
 	        {
-	        	LEBENprojahr = rs.getDouble("anzahl");
+	        	LEBENprojahr = rs.getInt("anzahl");
 	        }
     	}
     	catch (SQLException e) 
@@ -297,21 +297,21 @@ class DBController
     	return LEBENprojahr;
     }
     
-    public double ausgabeStornoquote()
+    public int ausgabeStornoquote()
     {
-    	double quote = 0.0;
-    	double i = 0.0;
-    	double y = 0.0;
+    	int quote = 0;
+    	int i = 0;
+    	int y = 0;
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT * FROM Ziele WHERE taetigkeit = 'Storno' ;"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT * FROM bestand WHERE taetigkeit = 'Storno' ;"); 
 	        while (rs.next()) 
 	        {
 	        	i++;
 	        }
 	        Statement stmn = connection.createStatement(); 
-	    	ResultSet rc = stmt.executeQuery("SELECT * FROM Ziele WHERE taetigkeit != 'Storno' ;"); 
+	    	ResultSet rc = stmt.executeQuery("SELECT * FROM bestand WHERE taetigkeit != 'Storno' ;"); 
 	        while (rs.next()) 
 	        {
 	        	y++;
@@ -327,9 +327,39 @@ class DBController
     	return quote;
     }
     
-    public double ausgabeDiagrammBestandLEBENproJahr(String taetigkeit)
+    public int ausgabeAbschlussquote()
     {
-    	double i = 0.0;
+    	int quote = 0;
+    	int i = 0;
+    	int y = 0;
+    	try
+    	{
+	    	Statement stmt = connection.createStatement(); 
+	    	ResultSet rs = stmt.executeQuery("SELECT * FROM bestand WHERE taetigkeit = 'Anbahnung' ;"); 
+	        while (rs.next()) 
+	        {
+	        	i++;
+	        }
+	        Statement stmn = connection.createStatement(); 
+	    	ResultSet rc = stmt.executeQuery("SELECT * FROM bestand WHERE taetigkeit = 'Abschluss' ;"); 
+	        while (rs.next()) 
+	        {
+	        	y++;
+	        }
+    	}
+    	catch (SQLException e) 
+        { 
+            System.err.println("Couldn't handle DB-Query"); 
+            e.printStackTrace(); 
+        }
+    	;
+    	quote = i/y;
+    	return quote;
+    }
+    
+    public int ausgabeDiagrammBestandLEBENproJahr(String taetigkeit)
+    {
+    	int i = 0;
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
@@ -350,16 +380,16 @@ class DBController
     //TEST
     
     
-    public double ausgabeDiagrammProv()
+    public int ausgabeDiagrammProv()
     {
-    	double provsumme = 0;
+    	int provsumme = 0;
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
 	    	ResultSet rs = stmt.executeQuery("SELECT provisionssumme FROM ziele where provisionssumme IS NOT NULL AND create_stamp = (select max(create_stamp)from ziele);"); 
 	        while (rs.next()) 
 	        {
-	        	provsumme = rs.getDouble("provisionssumme");
+	        	provsumme = rs.getInt("provisionssumme");
 	        }
     	}
     	catch (SQLException e) 
@@ -370,16 +400,16 @@ class DBController
     	return provsumme;
     }
     
-    public double ausgabeDiagrammProvSumme()
+    public int ausgabeDiagrammProvSumme()
     {
-    	double provsumme = 0;
+    	int provsumme = 0;
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
 	    	ResultSet rs = stmt.executeQuery("SELECT sum(netto_provison) AS provisionssummenwurst FROM bestand WHERE strftime('%m',datetime(update_stamp,'unixepoch')) = strftime('%m','now');"); 
 	        while (rs.next()) 
 	        {
-	        	provsumme = rs.getDouble("provisionssummenwurst");
+	        	provsumme = rs.getInt("provisionssummenwurst");
 	        }
     	}
     	catch (SQLException e) 
@@ -401,8 +431,8 @@ class DBController
 	        { 
 	            System.out.println("Taetigkeit = " + rs.getString("taetigkeit"));
 	            System.out.println("Sparte = " + rs.getString("sparte"));
-	            System.out.println("Anzahl = " + rs.getDouble("anzahl"));
-	            System.out.println("Provisionssumme = " + rs.getDouble("provisionssumme"));
+	            System.out.println("Anzahl = " + rs.getInt("anzahl"));
+	            System.out.println("Provisionssumme = " + rs.getInt("provisionssumme"));
 	        }
 	        rs.close(); 
 	    } catch (SQLException e) 
@@ -424,8 +454,8 @@ class DBController
         { 
             System.out.println("Taetigkeit = " + rs.getString("taetigkeit"));
             System.out.println("Sparte = " + rs.getString("sparte"));
-            System.out.println("Anzahl = " + rs.getDouble("anzahl"));
-            System.out.println("Provisionssumme = " + rs.getDouble("provisionssumme"));
+            System.out.println("Anzahl = " + rs.getInt("anzahl"));
+            System.out.println("Provisionssumme = " + rs.getInt("provisionssumme"));
         }
         rs.close(); 
     } catch (SQLException e) 
@@ -448,8 +478,8 @@ class DBController
             System.out.println("ID = " + rs.getInt("id")); 
             System.out.println("Taetigkeit = " + rs.getString("taetigkeit")); 
             System.out.println("Sparte = " + rs.getString("sparte")); 
-            System.out.println("Pr�mie = " + rs.getDouble("praemie")); 
-            System.out.println("Netto Provision = " + rs.getDouble("netto_provison"));
+            System.out.println("Pr�mie = " + rs.getInt("praemie")); 
+            System.out.println("Netto Provision = " + rs.getInt("netto_provison"));
             System.out.println("Crossseling = " + rs.getString("crossselling"));
             System.out.println("Create Stamp = " + rs.getTimestamp("create_stamp"));
             System.out.println("Update Stamp = " + rs.getTimestamp("update_stamp"));
@@ -465,7 +495,7 @@ class DBController
     }
     
     // Insert Zielsetzung
-    public void insertZielsetzungen(String taetigkeit, String sparte, Double anzahl_taetigkeiten, Double provisionsziel)
+    public void insertZielsetzungen(String taetigkeit, String sparte, int anzahl_taetigkeiten, int provisionsziel)
     {
     	java.sql.Timestamp  sqlDate = new java.sql.Timestamp(new java.util.Date().getTime());
     	
@@ -480,8 +510,8 @@ class DBController
 
          ps.setString(1, taetigkeit);
          ps.setString(2, sparte);
-         ps.setDouble(3, anzahl_taetigkeiten);
-         ps.setDouble(4, provisionsziel); 
+         ps.setInt(3, anzahl_taetigkeiten);
+         ps.setInt(4, provisionsziel); 
          ps.setDouble(5, create_stamp); 
          ps.addBatch();
          ps.executeBatch();
@@ -497,7 +527,7 @@ class DBController
     }
     // Befuelle IST-Zustand
     
-    public void insertistzustand(String taetigkeit, String sparte, Double anzahl_taetigkeiten, Double provisionsziel)
+    public void insertistzustand(String taetigkeit, String sparte, Integer anzahl_taetigkeiten, double provisionsziel)
     {
     	java.sql.Timestamp  sqlDate = new java.sql.Timestamp(new java.util.Date().getTime());
     	
@@ -512,7 +542,7 @@ class DBController
 
          ps.setString(1, taetigkeit);
          ps.setString(2, sparte);
-         ps.setDouble(3, anzahl_taetigkeiten);
+         ps.setInt(3, anzahl_taetigkeiten);
          ps.setDouble(4, provisionsziel);  
          ps.setLong(5, create_stamp);  
          ps.addBatch();
@@ -528,7 +558,7 @@ class DBController
     	
     }
  
-    public void insertBestand(String taetigkeit, String sparte, Double praemie, Double netto_provision, String crossselling)
+    public void insertBestand(String taetigkeit, String sparte, double praemie, double netto_provision, String crossselling)
     {
     	
     	long timestamp = System.currentTimeMillis()/1000;
