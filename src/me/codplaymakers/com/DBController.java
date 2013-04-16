@@ -135,7 +135,7 @@ class DBController
     
     
     
-    public double ausgabeDiagrammZieleSHU(String taetigkeit, String sparte)
+    public double ausgabeDiagrammZieleSHU(String taetigkeit)
     {
     	double anzahl = 0.0;
     	try
@@ -155,7 +155,7 @@ class DBController
     	return anzahl;
     }
     
-    public double ausgabeDiagrammZieleL(String taetigkeit, String sparte)
+    public double ausgabeDiagrammZieleL(String taetigkeit)
     {
     	double anzahl = 0.0;
     	try
@@ -175,7 +175,7 @@ class DBController
     	return anzahl;
     }
     
-    public double ausgabeDiagrammZieleKFZ(String taetigkeit, String sparte)
+    public double ausgabeDiagrammZieleKFZ(String taetigkeit)
     {
     	double anzahl = 0.0;
     	try
@@ -201,7 +201,7 @@ class DBController
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT provisionssumme FROM ziele where provisionssumme IS NOT NULL AND create_stamp = max(create_stamp) "); 
+	    	ResultSet rs = stmt.executeQuery("SELECT provisionssumme FROM ziele where provisionssumme IS NOT NULL AND create_stamp = (select max(create_stamp)from ziele) "); 
 	        while (rs.next()) 
 	        {
 	        	provsumme = rs.getDouble("provisionssumme");
