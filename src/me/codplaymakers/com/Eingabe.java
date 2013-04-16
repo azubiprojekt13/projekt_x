@@ -450,8 +450,9 @@ public class Eingabe
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				//Balkendiagramm lebenjahr = new Balkendiagramm("Uebersicht Leben/Jahr", dbc.ausg, wert2)
-				
+				Balkendiagramm lebenjahr = new Balkendiagramm("Uebersicht KFZ/Jahr", dbc.ausgabeDiagrammBestandKFZ(cbzftaetigkeit.getSelectedItem().toString()), dbc.ausgabeDiagrammZieleKFZproJahr(cbzftaetigkeit.getSelectedItem().toString()));
+				lebenjahr.pack();
+				lebenjahr.setVisible(true);
 			}
 		});
 		ziel7.setBounds(196, 98, 143, 20);
