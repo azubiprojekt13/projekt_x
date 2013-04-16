@@ -195,13 +195,33 @@ class DBController
     	return anzahl;
     }
     
+    public double ausgabeDiagrammBestandKFZproJahr(String taetigkeit)
+    {
+    	double i = 0.0;
+    	try
+    	{
+	    	Statement stmt = connection.createStatement(); 
+	    	ResultSet rs = stmt.executeQuery("SELECT * FROM bestand WHERE taetigkeit = '"+taetigkeit+"' AND sparte ='KFZ';"); 
+	        while (rs.next()) 
+	        {
+	        	i++;
+	        }
+    	}
+    	catch (SQLException e) 
+        { 
+            System.err.println("Couldn't handle DB-Query"); 
+            e.printStackTrace(); 
+        }
+    	return i;
+    }
+    
     public double ausgabeDiagrammZieleKFZproJahr(String taetigkeit)
     {
     	double KFZprojahr = 0;
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM Ziele WHERE sparte ='KFZ' and create_stamp = (select max(create_stamp) from ziele);"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM Ziele WHERE taetigkeit = '"+taetigkeit+"' AND sparte ='KFZ' and create_stamp = (select max(create_stamp) from ziele);"); 
 	        while (rs.next()) 
 	        {
 	        	KFZprojahr = rs.getDouble("anzahl");
@@ -221,7 +241,7 @@ class DBController
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM Ziele WHERE sparte ='SHU' and create_stamp = (select max(create_stamp) from ziele);"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM Ziele WHERE taetigkeit = '"+taetigkeit+"' AND sparte ='SHU' and create_stamp = (select max(create_stamp) from ziele);"); 
 	        while (rs.next()) 
 	        {
 	        	SHUprojahr = rs.getDouble("anzahl");
@@ -236,13 +256,33 @@ class DBController
     	return SHUprojahr;
     }
     
+    public double ausgabeDiagrammBestandSHUproJahr(String taetigkeit)
+    {
+    	double i = 0.0;
+    	try
+    	{
+	    	Statement stmt = connection.createStatement(); 
+	    	ResultSet rs = stmt.executeQuery("SELECT * FROM bestand WHERE taetigkeit = '"+taetigkeit+"' AND sparte ='HRV' OR sparte ='WGV' OR sparte ='GLS' OR sparte ='UNF';"); 
+	        while (rs.next()) 
+	        {
+	        	i++;
+	        }
+    	}
+    	catch (SQLException e) 
+        { 
+            System.err.println("Couldn't handle DB-Query"); 
+            e.printStackTrace(); 
+        }
+    	return i;
+    }
+    
     public double ausgabeDiagrammZieleLEBENproJahr(String taetigkeit)
     {
     	double LEBENprojahr = 0;
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM Ziele WHERE sparte ='Leben' and create_stamp = (select max(create_stamp) from ziele);"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM Ziele WHERE taetigkeit = '"+taetigkeit+"' AND sparte ='Leben' and create_stamp = (select max(create_stamp) from ziele);"); 
 	        while (rs.next()) 
 	        {
 	        	LEBENprojahr = rs.getDouble("anzahl");
@@ -257,13 +297,34 @@ class DBController
     	return LEBENprojahr;
     }
     
+    public double ausgabeDiagrammBestandLEBENproJahr(String taetigkeit)
+    {
+    	double i = 0.0;
+    	try
+    	{
+	    	Statement stmt = connection.createStatement(); 
+	    	ResultSet rs = stmt.executeQuery("SELECT * FROM bestand WHERE taetigkeit = '"+taetigkeit+"' AND sparte ='LV';"); 
+	        while (rs.next()) 
+	        {
+	        	i++;
+	        }
+    	}
+    	catch (SQLException e) 
+        { 
+            System.err.println("Couldn't handle DB-Query"); 
+            e.printStackTrace(); 
+        }
+    	return i;
+    }
+    
+    
     public double ausgabeDiagrammProv()
     {
     	double provsumme = 0;
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT provisionssumme FROM ziele where provisionssumme IS NOT NULL AND create_stamp = (select max(create_stamp)from ziele) "); 
+	    	ResultSet rs = stmt.executeQuery("SELECT provisionssumme FROM ziele where provisionssumme IS NOT NULL AND create_stamp = (select max(create_stamp)from ziele);"); 
 	        while (rs.next()) 
 	        {
 	        	provsumme = rs.getDouble("provisionssumme");
