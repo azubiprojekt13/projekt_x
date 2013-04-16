@@ -393,7 +393,7 @@ public class Eingabe
 		
 		final JComboBox cbzfsparte = new JComboBox();
 		cbzfsparte.setBounds(152, 36, 154, 20);
-		cbzfsparte.setModel(new DefaultComboBoxModel(new String[] {"SHU", "L", "K", "   "}));
+		cbzfsparte.setModel(new DefaultComboBoxModel(new String[] {"SHU", "Leben", "KFZ", "   "}));
 		cbzfsparte.setSelectedItem(" ");
 		tabzusammenfassung.add(cbzfsparte);
 		
@@ -539,7 +539,7 @@ public class Eingabe
 		tabziele.add(cbztaetigkeit);
 		
 		final JComboBox cbzsparte = new JComboBox();
-		cbzsparte.setModel(new DefaultComboBoxModel(new String[] {"SHU", "L", "K", "   "}));
+		cbzsparte.setModel(new DefaultComboBoxModel(new String[] {"SHU", "Leben", "KFZ", "   "}));
 		cbzsparte.setSelectedItem(" ");
 		cbzsparte.setBounds(118, 42, 143, 20);
 		tabziele.add(cbzsparte);
