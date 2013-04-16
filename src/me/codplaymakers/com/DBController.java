@@ -201,7 +201,7 @@ class DBController
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM Ziele WHERE AND sparte ='KFZ' and create_stamp = (select max(create_stamp) from ziele);"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM Ziele WHERE sparte ='KFZ' and create_stamp = (select max(create_stamp) from ziele);"); 
 	        while (rs.next()) 
 	        {
 	        	KFZprojahr = rs.getDouble("anzahl");
@@ -221,7 +221,7 @@ class DBController
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM Ziele WHERE AND sparte ='SHU' and create_stamp = (select max(create_stamp) from ziele);"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM Ziele WHERE sparte ='SHU' and create_stamp = (select max(create_stamp) from ziele);"); 
 	        while (rs.next()) 
 	        {
 	        	SHUprojahr = rs.getDouble("anzahl");
@@ -242,7 +242,7 @@ class DBController
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM Ziele WHERE AND sparte ='L' and create_stamp = (select max(create_stamp) from ziele);"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM Ziele WHERE sparte ='Leben' and create_stamp = (select max(create_stamp) from ziele);"); 
 	        while (rs.next()) 
 	        {
 	        	LEBENprojahr = rs.getDouble("anzahl");
