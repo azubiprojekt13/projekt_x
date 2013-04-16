@@ -100,7 +100,7 @@ class DBController
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT * FROM bestand WHERE strftime('%m',datetime(update_stamp,'unixepoch'))= strftime('%m','now') AND taetigkeit = '"+taetigkeit+"' AND sparte ='L';"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT * FROM bestand WHERE strftime('%m',datetime(update_stamp,'unixepoch'))= strftime('%m','now') AND taetigkeit = '"+taetigkeit+"' AND sparte ='LV';"); 
 	        while (rs.next()) 
 	        {
 	        	i++;
@@ -161,7 +161,7 @@ class DBController
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM ziele where taetigkeit = '"+taetigkeit+"' AND sparte ='L' AND create_stamp = (select max(create_stamp) from ziele);"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM ziele where taetigkeit = '"+taetigkeit+"' AND sparte ='Leben' AND create_stamp = (select max(create_stamp) from ziele);"); 
 	        while (rs.next()) 
 	        {
 	        	anzahl=rs.getInt("anzahl");
@@ -181,7 +181,7 @@ class DBController
     	try
     	{
 	    	Statement stmt = connection.createStatement(); 
-	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM ziele where taetigkeit = '"+taetigkeit+"' AND sparte ='KFZ' AND create_stamp = (select max(create_stamp) from ziele);"); 
+	    	ResultSet rs = stmt.executeQuery("SELECT anzahl FROM ziele where taetigkeit = '"+taetigkeit+"' AND sparte ='KFZ' AND create_stamp = (select max(create_stamp) from ziele AND sparte ='KFZ');"); 
 	        while (rs.next()) 
 	        {
 	        	anzahl=rs.getInt("anzahl");

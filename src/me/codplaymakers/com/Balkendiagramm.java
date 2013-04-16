@@ -23,7 +23,7 @@ public class Balkendiagramm extends JDialog {
 *
 * @param title the frame title.
 */
-public Balkendiagramm(String title, double wert1, double wert2) {
+public Balkendiagramm(String title, Integer wert1, Integer wert2) {
 	
 super();
 

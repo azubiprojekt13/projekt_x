@@ -51,7 +51,7 @@ public class Eingabe
 				JTextPane txtpnSparte = new JTextPane();
 				txtpnSparte.setBackground(SystemColor.menu);
 				txtpnSparte.setEditable(false);
-				txtpnSparte.setText("Sparte");
+				txtpnSparte.setText("Vertragsart");
 				txtpnSparte.setBounds(10, 36, 66, 20);
 				tabeingabe.add(txtpnSparte);
 				
